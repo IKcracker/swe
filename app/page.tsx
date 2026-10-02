@@ -191,16 +191,16 @@ export default function Home() {
           </div>
 
           <div className="resource-links">
-            <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer">
+            <a href="/track">
               <span>Track a shipment</span><Arrow />
             </a>
-            <a href="/contact">
+            <a href="/documents">
               <span>Shipping documents</span><Arrow />
             </a>
-            <a href="/contact">
+            <a href="/documents">
               <span>Account application</span><Arrow />
             </a>
-            <a href="/contact">
+            <a href="/documents">
               <span>Conditions of carriage</span><Arrow />
             </a>
           </div>
@@ -218,7 +218,7 @@ export default function Home() {
               Speak to the SWE team about the right courier or freight solution
               for your shipment.
             </p>
-            <a href="mailto:info@swe.co.za?subject=SWE%20Quote%20Request" className="button button-light">
+            <a href="/quote" className="button button-light">
               Request a quote <Arrow />
             </a>
           </div>
