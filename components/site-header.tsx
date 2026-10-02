@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 function Arrow() {
@@ -5,15 +6,6 @@ function Arrow() {
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M5 12h13M13 6l6 6-6 6" />
     </svg>
-  );
-}
-
-function RedMark() {
-  return (
-    <span className="red-brand-mark" aria-hidden="true">
-      <strong>SWE</strong>
-      <small>RED</small>
-    </span>
   );
 }
 
@@ -34,11 +26,8 @@ export function SiteHeader() {
       <header className="site-header">
         <div className="container header-inner">
           <Link href="/" className="brand" aria-label="SWE Red home">
-            <RedMark />
-            <span className="brand-name">
-              <strong>SWE Red</strong>
-              <small>Logistics Network</small>
-            </span>
+            <Image src="/swe-red-logo.svg" alt="SWE Red Logistics Network" width={210} height={60} className="brand-logo" priority />
+            
           </Link>
 
           <nav className="desktop-nav" aria-label="Primary navigation">
