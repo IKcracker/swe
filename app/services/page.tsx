@@ -4,24 +4,24 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Courier & Freight Services",
   description:
-    "Explore SWE domestic and international courier, express, road freight and airfreight services.",
+    "Explore SWE Red domestic courier, road freight, cross-border and international logistics services.",
 };
 
 const domestic = [
   ["Same Day Express","For urgent door-to-door shipments between major destinations when delivery cannot wait."],
-  ["Overnight Express","Next-business-day delivery to major centres with extended regional coverage."],
-  ["Early Bird Delivery","Priority early-morning delivery for shipments that need to arrive before the normal business day."],
-  ["Economy","A more cost-conscious courier option for less urgent consignments."],
-  ["Road Freight","Practical transport for larger, heavier or less time-sensitive shipments."],
+  ["Next Day Express","Next-business-day delivery for routine business shipments."],
+  ["Priority Delivery","Early or time-sensitive delivery for critical consignments."],
+  ["Economy","A cost-conscious option for less urgent shipments."],
+  ["Road Freight","Practical transport for larger, heavier or less time-sensitive consignments."],
 ];
 
 const international = [
-  ["Courier Documents","Time-sensitive international document delivery."],
-  ["Courier Parcels","International parcel movement for business shipments."],
-  ["Urgent Special Shipments","Special handling for urgent or non-standard international consignments."],
-  ["International Road Freight","Cross-border road freight into neighbouring Southern African markets."],
+  ["International Documents","Time-sensitive international document delivery."],
+  ["International Parcels","Global parcel movement for business shipments."],
+  ["Urgent Special Shipments","Priority handling for urgent or non-standard consignments."],
+  ["Cross-Border Road Freight","Regional road freight into neighbouring markets."],
   ["International Air Freight","Flexible airfreight for larger international shipments."],
-  ["Temporary Exports","Support for goods leaving South Africa temporarily and returning later."],
+  ["Temporary Export Support","A proposed service flow for temporary outbound goods."],
 ];
 
 function Arrow() {
@@ -32,16 +32,14 @@ function Arrow() {
   );
 }
 
-
 export default function ServicesPage() {
   return (
     <main>
-
       <section className="inner-hero services-hero">
         <div className="container inner-hero-grid">
           <div>
-            <p className="section-label">Courier & freight services</p>
-            <h1>The right service for every shipment.</h1>
+            <p className="section-label">SWE Red services</p>
+            <h1>The right movement for every shipment.</h1>
           </div>
           <div className="inner-hero-copy">
             <p>
@@ -59,17 +57,14 @@ export default function ServicesPage() {
             <span>01</span>
             <p className="section-label">Domestic</p>
             <h2>Across South Africa.</h2>
-            <p>Time-critical, overnight and freight services for local business deliveries.</p>
+            <p>Time-critical, routine and freight services for local business deliveries.</p>
           </aside>
 
           <div className="service-detail-list">
             {domestic.map(([title,copy], index) => (
               <article key={title}>
                 <span>{String(index + 1).padStart(2,"0")}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
-                </div>
+                <div><h3>{title}</h3><p>{copy}</p></div>
                 <Link href="/quote" aria-label={`Request a quote for ${title}`}><Arrow /></Link>
               </article>
             ))}
@@ -82,18 +77,15 @@ export default function ServicesPage() {
           <aside>
             <span>02</span>
             <p className="section-label section-label-light">International</p>
-            <h2>Beyond our borders.</h2>
-            <p>Courier, road freight and airfreight solutions for international movement.</p>
+            <h2>Regional and global.</h2>
+            <p>Courier, road freight and airfreight concepts for cross-border movement.</p>
           </aside>
 
           <div className="service-detail-list">
             {international.map(([title,copy], index) => (
               <article key={title}>
                 <span>{String(index + 1).padStart(2,"0")}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
-                </div>
+                <div><h3>{title}</h3><p>{copy}</p></div>
                 <Link href="/quote" aria-label={`Request a quote for ${title}`}><Arrow /></Link>
               </article>
             ))}
@@ -109,9 +101,9 @@ export default function ServicesPage() {
           </div>
           <div>
             <p>
-              Tell SWE what you are sending, where it is going, its weight and
-              dimensions, and when it needs to arrive. The team can guide you
-              toward the most practical service.
+              Share the route, weight, dimensions and delivery deadline. The
+              final implementation can use those details to recommend the most
+              practical service.
             </p>
             <Link href="/quote" className="button button-dark">Request a quote <Arrow /></Link>
           </div>
