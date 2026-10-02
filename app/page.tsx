@@ -61,10 +61,10 @@ export default function Home() {
           </nav>
 
           <div className="header-actions">
-            <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer" className="track-link">
+            <a href="/track" className="track-link">
               Track shipment
             </a>
-            <a href="#quote" className="header-cta">
+            <a href="/quote" className="header-cta">
               Get a quote <Arrow />
             </a>
           </div>
@@ -97,7 +97,7 @@ export default function Home() {
             </p>
 
             <div className="hero-actions">
-              <a href="#quote" className="button button-dark">
+              <a href="/quote" className="button button-dark">
                 Request a quote <Arrow />
               </a>
               <a href="/services" className="button button-text">
@@ -180,7 +180,7 @@ export default function Home() {
             </div>
             <div className="service-links">
               {domesticServices.map((service) => (
-                <a href="#quote" key={service}>
+                <a href="/quote" key={service}>
                   <span>{service}</span><Arrow />
                 </a>
               ))}
@@ -195,7 +195,7 @@ export default function Home() {
             </div>
             <div className="service-links">
               {internationalServices.map((service) => (
-                <a href="#quote" key={service}>
+                <a href="/quote" key={service}>
                   <span>{service}</span><Arrow />
                 </a>
               ))}
@@ -301,7 +301,7 @@ export default function Home() {
           <div className="footer-column">
             <strong>Customer</strong>
             <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer">Track shipment</a>
-            <a href="#quote">Get a quote</a>
+            <a href="/quote">Get a quote</a>
             <a href="mailto:info@swe.co.za">info@swe.co.za</a>
           </div>
         </div>
