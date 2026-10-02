@@ -52,8 +52,8 @@ export default function Home() {
           </a>
 
           <nav className="desktop-nav" aria-label="Primary navigation">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
+            <a href="/about">About</a>
+            <a href="/services">Services</a>
             <a href="#network">Network</a>
             <a href="#resources">Documents</a>
             <a href="#contact">Contact</a>
@@ -71,8 +71,8 @@ export default function Home() {
           <details className="mobile-menu">
             <summary aria-label="Open menu"><span /><span /></summary>
             <div>
-              <a href="#about">About</a>
-              <a href="#services">Services</a>
+              <a href="/about">About</a>
+              <a href="/services">Services</a>
               <a href="#network">Network</a>
               <a href="#resources">Documents</a>
               <a href="#contact">Contact</a>
@@ -99,7 +99,7 @@ export default function Home() {
               <a href="#quote" className="button button-dark">
                 Request a quote <Arrow />
               </a>
-              <a href="#services" className="button button-text">
+              <a href="/services" className="button button-text">
                 Explore services <Arrow />
               </a>
             </div>
@@ -291,8 +291,8 @@ export default function Home() {
 
           <div className="footer-column">
             <strong>Navigate</strong>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
+            <a href="/about">About</a>
+            <a href="/services">Services</a>
             <a href="#network">Network</a>
             <a href="#resources">Documents</a>
           </div>
