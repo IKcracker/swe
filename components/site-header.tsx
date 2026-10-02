@@ -8,10 +8,11 @@ function Arrow() {
   );
 }
 
-function Mark() {
+function RedMark() {
   return (
-    <span className="swe-mark" aria-hidden="true">
-      <span>S</span><span>W</span><span>E</span>
+    <span className="red-brand-mark" aria-hidden="true">
+      <strong>SWE</strong>
+      <small>RED</small>
     </span>
   );
 }
@@ -21,22 +22,22 @@ export function SiteHeader() {
     <>
       <div className="utility-bar">
         <div className="container utility-inner">
-          <span>Courier • Freight • Airfreight</span>
+          <span>Courier • Freight • Logistics</span>
           <div className="utility-right">
-            <a href="tel:+27315696808">031 569 6808</a>
+            <span>South Africa • Regional • Global</span>
             <i />
-            <strong>8 Days a Week</strong>
+            <strong>Move with certainty</strong>
           </div>
         </div>
       </div>
 
       <header className="site-header">
         <div className="container header-inner">
-          <Link href="/" className="brand" aria-label="Siyanqoba Worldwide Express home">
-            <Mark />
+          <Link href="/" className="brand" aria-label="SWE Red home">
+            <RedMark />
             <span className="brand-name">
-              <strong>Siyanqoba</strong>
-              <small>Worldwide Express</small>
+              <strong>SWE Red</strong>
+              <small>Logistics Network</small>
             </span>
           </Link>
 
@@ -68,7 +69,7 @@ export function SiteHeader() {
               </span>
             </summary>
             <div className="mobile-menu-panel">
-              <span className="mobile-menu-kicker">Explore SWE</span>
+              <span className="mobile-menu-kicker">Explore SWE Red</span>
               <Link href="/about">About</Link>
               <Link href="/services">Services</Link>
               <Link href="/#network">Network</Link>
