@@ -70,8 +70,8 @@ export default function ServicesPage() {
           </nav>
 
           <div className="header-actions">
-            <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer" className="track-link">Track shipment</a>
-            <Link href="/#quote" className="header-cta">Get a quote <Arrow /></Link>
+            <a href="/track" className="track-link">Track shipment</a>
+            <Link href="/quote" className="header-cta">Get a quote <Arrow /></Link>
           </div>
         </div>
       </header>
@@ -109,7 +109,7 @@ export default function ServicesPage() {
                   <h3>{title}</h3>
                   <p>{copy}</p>
                 </div>
-                <Link href="/#quote" aria-label={`Request a quote for ${title}`}><Arrow /></Link>
+                <Link href="/quote" aria-label={`Request a quote for ${title}`}><Arrow /></Link>
               </article>
             ))}
           </div>
@@ -133,7 +133,7 @@ export default function ServicesPage() {
                   <h3>{title}</h3>
                   <p>{copy}</p>
                 </div>
-                <Link href="/#quote" aria-label={`Request a quote for ${title}`}><Arrow /></Link>
+                <Link href="/quote" aria-label={`Request a quote for ${title}`}><Arrow /></Link>
               </article>
             ))}
           </div>
@@ -152,7 +152,7 @@ export default function ServicesPage() {
               dimensions, and when it needs to arrive. The team can guide you
               toward the most practical service.
             </p>
-            <Link href="/#quote" className="button button-dark">Request a quote <Arrow /></Link>
+            <Link href="/quote" className="button button-dark">Request a quote <Arrow /></Link>
           </div>
         </div>
       </section>
