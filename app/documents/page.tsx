@@ -4,47 +4,14 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Documents & Resources",
   description:
-    "Access SWE account forms, insurance information, privacy documents, cargo care resources and certifications.",
+    "Access SWE Red proposal documents and internal resource previews.",
 };
 
 const documentation = [
-  {
-    title: "Accounts Facility Application Form",
-    description: "Apply for an SWE account facility and review the applicable standard trading conditions.",
-    href: "https://www.swe.co.za/documents/Account%20Facility%20Application.pdf",
-  },
-  {
-    title: "Insurance Information",
-    description: "Review insurance-related information for shipments and freight movements.",
-    href: "https://www.swe.co.za/documents.php",
-  },
-  {
-    title: "Privacy Information",
-    description: "Read SWE privacy information and policies regarding customer and company data.",
-    href: "https://www.swe.co.za/documents.php",
-  },
-  {
-    title: "POPI & PAIA",
-    description: "Access SWE information relating to POPIA and the Promotion of Access to Information Act.",
-    href: "https://www.swe.co.za/documents/PAIA_POPI_MANUAL_SWE.pdf",
-  },
-  {
-    title: "Cargo Care Terms & Conditions",
-    description: "Understand SWE Cargo Care terms, claims requirements and applicable cover.",
-    href: "https://www.swe.co.za/documents/Cargo%20Care%20Terms%20%20Conditions%2008.09.21.pdf",
-  },
-  {
-    title: "Cargo Care Claim Form",
-    description: "Access the documentation required when submitting a Cargo Care claim.",
-    href: "https://www.swe.co.za/documents.php",
-  },
-];
-
-const certifications = [
-  "BEE Certification",
-  "ICASA Certification",
-  "COIDA Letter of Good Standing",
-  "Employment Equity Certificate of Compliance",
+  ["Account Application","A neutral sample account-onboarding resource for the proposal.","account-application"],
+  ["Shipping Guide","General shipment preparation guidance for the demo experience.","shipping-guide"],
+  ["Privacy & Compliance","A placeholder compliance area to be replaced with client-approved legal content.","privacy-compliance"],
+  ["Cargo Care Overview","A neutral overview of claims and shipment protection workflows.","cargo-care"],
 ];
 
 function Arrow() {
@@ -55,22 +22,19 @@ function Arrow() {
   );
 }
 
-
 export default function DocumentsPage() {
   return (
     <main>
-
       <section className="inner-hero documents-hero">
         <div className="container inner-hero-grid">
           <div>
             <p className="section-label">Documents & resources</p>
-            <h1>Important information, easy to find.</h1>
+            <h1>Proposal resources, kept in-house.</h1>
           </div>
           <div className="inner-hero-copy">
             <p>
-              Access customer application forms, insurance information, privacy
-              and compliance documents, Cargo Care resources and company
-              certifications.
+              These resources are original SWE Red placeholders. Client-owned
+              forms, policies and certifications can replace them before launch.
             </p>
           </div>
         </div>
@@ -79,30 +43,21 @@ export default function DocumentsPage() {
       <section className="documents-section">
         <div className="container documents-layout">
           <aside>
-            <p className="section-label">Documentation</p>
-            <h2>Customer forms & policies.</h2>
+            <p className="section-label">Internal resources</p>
+            <h2>No copied PDFs or external company links.</h2>
             <p>
-              Open the resource you need in a new tab. Existing SWE source
-              documents remain available while the new website is being rebuilt.
+              Every resource below stays inside this proposal site, avoiding
+              dependencies on another company&apos;s documents or hosted assets.
             </p>
           </aside>
 
           <div className="documents-list">
-            {documentation.map((document, index) => (
-              <a
-                href={document.href}
-                target="_blank"
-                rel="noreferrer"
-                className="document-row"
-                key={document.title}
-              >
+            {documentation.map(([title,description,slug], index) => (
+              <Link href={`/documents/${slug}`} className="document-row" key={slug}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3>{document.title}</h3>
-                  <p>{document.description}</p>
-                </div>
+                <div><h3>{title}</h3><p>{description}</p></div>
                 <Arrow />
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -111,25 +66,13 @@ export default function DocumentsPage() {
       <section className="certification-section">
         <div className="container certification-grid">
           <div>
-            <p className="section-label section-label-light">Certification</p>
-            <h2>Company credentials and compliance.</h2>
+            <p className="section-label section-label-light">Launch checklist</p>
+            <h2>Client-owned compliance content goes here.</h2>
           </div>
-
           <div className="certification-list">
-            {certifications.map((item, index) => (
-              <div key={item}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{item}</strong>
-              </div>
+            {["Company registration details","Insurance or cargo-cover policy","Privacy and POPIA documentation","Industry certifications"].map((item,index)=>(
+              <div key={item}><span>{String(index+1).padStart(2,"0")}</span><strong>{item}</strong></div>
             ))}
-            <a
-              href="https://www.swe.co.za/documents.php"
-              target="_blank"
-              rel="noreferrer"
-              className="certification-link"
-            >
-              View certification documents <Arrow />
-            </a>
           </div>
         </div>
       </section>
@@ -137,12 +80,10 @@ export default function DocumentsPage() {
       <section className="inner-cta">
         <div className="container inner-cta-grid">
           <div>
-            <p className="section-label section-label-light">Need assistance?</p>
-            <h2>Not sure which document you need?</h2>
+            <p className="section-label section-label-light">Need a resource?</p>
+            <h2>Client documents can be connected at launch.</h2>
           </div>
-          <Link href="/contact" className="button button-light">
-            Contact SWE <Arrow />
-          </Link>
+          <Link href="/contact" className="button button-light">Contact SWE Red <Arrow /></Link>
         </div>
       </section>
     </main>
