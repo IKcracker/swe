@@ -65,6 +65,7 @@ export default function ServicesPage() {
             <Link href="/services">Services</Link>
             <Link href="/#network">Network</Link>
             <Link href="/documents">Documents</Link>
+            <Link href="/careers">Careers</Link>
             <Link href="/contact">Contact</Link>
           </nav>
 
