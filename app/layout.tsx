@@ -7,12 +7,11 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.swe.co.za"),
-  title: { default: "SWE | Specialised Worldwide Express", template: "%s | SWE" },
-  description: "Domestic and international courier, express delivery, road freight and logistics solutions from Specialised Worldwide Express.",
-  keywords: ["SWE","Specialised Worldwide Express","courier South Africa","road freight","overnight express","international courier","logistics South Africa"],
-  alternates: { canonical: "/" },
+  title: { default: "SWE | Siyanqoba Worldwide Express", template: "%s | SWE" },
+  description: "Domestic and international courier, express delivery, road freight and logistics solutions from Siyanqoba Worldwide Express.",
+  keywords: ["SWE","Siyanqoba Worldwide Express","courier South Africa","road freight","overnight express","international courier","logistics South Africa"],
   openGraph: {
-    title: "SWE | Specialised Worldwide Express",
+    title: "SWE | Siyanqoba Worldwide Express",
     description: "Courier, express delivery and freight solutions across South Africa and beyond.",
     type: "website",
     locale: "en_ZA",
