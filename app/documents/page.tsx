@@ -93,10 +93,10 @@ export default function DocumentsPage() {
           </nav>
 
           <div className="header-actions">
-            <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer" className="track-link">
+            <a href="/track" className="track-link">
               Track shipment
             </a>
-            <Link href="/#quote" className="header-cta">
+            <Link href="/quote" className="header-cta">
               Get a quote <Arrow />
             </Link>
           </div>
