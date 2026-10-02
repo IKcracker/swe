@@ -180,6 +180,9 @@ url("https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fi
   .image-story{grid-template-columns:1fr}
   .image-story-photo{min-height:520px}
   .image-story-copy{padding:70px 48px}
+  .footer-cta-inner{grid-template-columns:1fr;gap:34px;padding-top:72px;padding-bottom:72px}
+  .footer-content{grid-template-columns:1fr;gap:58px}
+  .footer-nav-group{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:700px){
   .container,.header-inner,.tracking-panel{width:min(100% - 32px,1320px)}
