@@ -15,13 +15,6 @@ function Arrow() {
   );
 }
 
-function Mark() {
-  return (
-    <span className="swe-mark" aria-hidden="true">
-      <span>S</span><span>W</span><span>E</span>
-    </span>
-  );
-}
 
 export default function TrackPage() {
   return (
