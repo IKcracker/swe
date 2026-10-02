@@ -23,65 +23,10 @@ function Arrow() {
   );
 }
 
-function Mark() {
-  return (
-    <span className="swe-mark" aria-hidden="true">
-      <span>S</span><span>W</span><span>E</span>
-    </span>
-  );
-}
 
 export default function Home() {
   return (
     <main>
-      <div className="utility-bar">
-        <div className="container utility-inner">
-          <span>Domestic & international courier</span>
-          <strong>8 Days a Week</strong>
-        </div>
-      </div>
-
-      <header className="site-header">
-        <div className="container header-inner">
-          <a href="#" className="brand" aria-label="Siyanqoba Worldwide Express home">
-            <Mark />
-            <span className="brand-name">
-              <strong>Siyanqoba</strong>
-              <small>Worldwide Express</small>
-            </span>
-          </a>
-
-          <nav className="desktop-nav" aria-label="Primary navigation">
-            <a href="/about">About</a>
-            <a href="/services">Services</a>
-            <a href="#network">Network</a>
-            <a href="/documents">Documents</a>
-            <a href="/careers">Careers</a>
-            <a href="/contact">Contact</a>
-          </nav>
-
-          <div className="header-actions">
-            <a href="/track" className="track-link">
-              Track shipment
-            </a>
-            <a href="/quote" className="header-cta">
-              Get a quote <Arrow />
-            </a>
-          </div>
-
-          <details className="mobile-menu">
-            <summary aria-label="Open menu"><span /><span /></summary>
-            <div>
-              <a href="/about">About</a>
-              <a href="/services">Services</a>
-              <a href="#network">Network</a>
-              <a href="/documents">Documents</a>
-              <a href="/contact">Contact</a>
-              <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer">Track shipment</a>
-            </div>
-          </details>
-        </div>
-      </header>
 
       <section className="hero">
         <div className="hero-copy">
@@ -279,38 +224,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <footer className="footer" id="contact">
-        <div className="container footer-main">
-          <div className="footer-brand">
-            <Mark />
-            <div>
-              <strong>Siyanqoba Worldwide Express</strong>
-              <span>Courier • Freight • Airfreight</span>
-            </div>
-          </div>
-
-          <div className="footer-column">
-            <strong>Navigate</strong>
-            <a href="/about">About</a>
-            <a href="/services">Services</a>
-            <a href="#network">Network</a>
-            <a href="/documents">Documents</a>
-          </div>
-
-          <div className="footer-column">
-            <strong>Customer</strong>
-            <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer">Track shipment</a>
-            <a href="/quote">Get a quote</a>
-            <a href="mailto:info@swe.co.za">info@swe.co.za</a>
-          </div>
-        </div>
-
-        <div className="container footer-bottom">
-          <span>Siyanqoba Worldwide Express</span>
-          <span>8 Days a Week</span>
-        </div>
-      </footer>
     </main>
   );
 }
