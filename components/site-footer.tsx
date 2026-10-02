@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 function Arrow() {
@@ -5,15 +6,6 @@ function Arrow() {
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M5 12h13M13 6l6 6-6 6" />
     </svg>
-  );
-}
-
-function RedMark() {
-  return (
-    <span className="red-brand-mark" aria-hidden="true">
-      <strong>SWE</strong>
-      <small>RED</small>
-    </span>
   );
 }
 
@@ -41,7 +33,7 @@ export function SiteFooter() {
       <div className="container footer-content">
         <div className="footer-brand-block">
           <div className="footer-brand">
-            <RedMark />
+            <Image src="/swe-red-logo.svg" alt="SWE Red Logistics Network" width={220} height={63} className="footer-logo" />
             <div>
               <strong>SWE Red Logistics Network</strong>
               <span>Courier • Freight • Logistics</span>
