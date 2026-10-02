@@ -56,6 +56,7 @@ export default function Home() {
             <a href="/services">Services</a>
             <a href="#network">Network</a>
             <a href="/documents">Documents</a>
+            <a href="/careers">Careers</a>
             <a href="/contact">Contact</a>
           </nav>
 
