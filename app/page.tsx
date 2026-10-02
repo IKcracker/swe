@@ -1,18 +1,18 @@
 const domesticServices = [
   "Same Day Express",
-  "Overnight Express",
-  "Early Bird Delivery",
+  "Next Day Express",
+  "Priority Delivery",
   "Economy",
   "Road Freight",
 ];
 
 const internationalServices = [
-  "Courier Documents",
-  "Courier Parcels",
+  "International Documents",
+  "International Parcels",
   "Urgent Special Shipments",
-  "International Road Freight",
+  "Cross-Border Road Freight",
   "International Air Freight",
-  "Temporary Exports",
+  "Temporary Export Support",
 ];
 
 function Arrow() {
@@ -23,22 +23,20 @@ function Arrow() {
   );
 }
 
-
 export default function Home() {
   return (
     <main>
-
       <section className="hero">
         <div className="hero-copy">
           <div className="hero-copy-inner">
-            <p className="eyebrow">Siyanqoba Worldwide Express</p>
+            <p className="eyebrow">SWE Red Logistics Network</p>
             <h1>
-              Domestic speed.
-              <span>Worldwide reach.</span>
+              Logistics built
+              <span>to move faster.</span>
             </h1>
             <p className="hero-lead">
-              Courier, airfreight and road freight solutions for businesses that
-              expect communication, reliability and service without compromise.
+              A modern courier and freight experience designed for domestic,
+              regional and international shipment needs.
             </p>
 
             <div className="hero-actions">
@@ -51,9 +49,9 @@ export default function Home() {
             </div>
 
             <div className="hero-footnote">
-              <span>South Africa</span>
-              <span>Southern Africa</span>
-              <span>Worldwide</span>
+              <span>Domestic</span>
+              <span>Regional</span>
+              <span>International</span>
             </div>
           </div>
         </div>
@@ -61,20 +59,20 @@ export default function Home() {
         <div className="hero-image">
           <div className="hero-image-overlay" />
           <div className="conquer-tag">
-            <small>Siyanqoba</small>
-            <strong>TO CONQUER</strong>
+            <small>SWE Red</small>
+            <strong>MOVE WITH CERTAINTY</strong>
           </div>
         </div>
 
         <div className="tracking-panel">
           <div className="tracking-title">
-            <small>Track & trace</small>
+            <small>Demo tracking</small>
             <strong>Find your shipment</strong>
           </div>
-          <form action="https://swe.pperfect.com/" method="get" target="_blank">
+          <form action="/track" method="get">
             <label>
-              <span className="sr-only">Waybill number</span>
-              <input name="waybill" placeholder="Enter waybill number" />
+              <span className="sr-only">Reference number</span>
+              <input name="ref" placeholder="Enter demo reference" />
             </label>
             <button type="submit">
               Track <Arrow />
@@ -86,19 +84,20 @@ export default function Home() {
       <section className="identity-section" id="about">
         <div className="container identity-grid">
           <div className="identity-word">
-            <span>SIYANQOBA</span>
-            <strong>TO CONQUER.</strong>
+            <span>SWE RED</span>
+            <strong>MOVE FORWARD.</strong>
           </div>
 
           <div className="identity-copy">
-            <p className="section-label">The name behind the service</p>
+            <p className="section-label">A new logistics identity</p>
             <h2>
-              More than a courier company. A commitment to keep moving forward.
+              Built around clarity, speed and dependable movement.
             </h2>
             <p>
-              “Siyanqoba” is derived from the Zulu word meaning “to conquer” —
-              a reflection of the dedication and passion SWE brings to every
-              customer relationship and every shipment.
+              SWE Red is a proposal concept created as an independent logistics
+              brand. It uses original visual assets, original copy and internal
+              demo flows so it can be presented without relying on another
+              company&apos;s website, documents or tracking platform.
             </p>
           </div>
         </div>
@@ -108,11 +107,11 @@ export default function Home() {
         <div className="container services-head">
           <div>
             <p className="section-label section-label-light">Services</p>
-            <h2>One partner. Two networks. Every kind of shipment.</h2>
+            <h2>One network. Multiple ways to move.</h2>
           </div>
           <p>
-            Choose from time-critical courier services, economy delivery,
-            road freight and international airfreight options.
+            Flexible delivery options for urgent courier work, larger freight
+            and international movement.
           </p>
         </div>
 
@@ -136,7 +135,7 @@ export default function Home() {
             <div className="service-column-head">
               <span>02</span>
               <h3>International</h3>
-              <p>Beyond our borders</p>
+              <p>Regional and global</p>
             </div>
             <div className="service-links">
               {internationalServices.map((service) => (
@@ -152,13 +151,13 @@ export default function Home() {
       <section className="image-story">
         <div className="image-story-photo" />
         <div className="image-story-copy">
-          <span className="story-number">08</span>
+          <span className="story-number">24</span>
           <div>
-            <p className="section-label">Days a week</p>
-            <h2>Service that does not stop at the ordinary.</h2>
+            <p className="section-label">Built around movement</p>
+            <h2>Visibility and service from first mile to final mile.</h2>
             <p>
-              Constant communication, trained teams and continuous improvement
-              remain at the centre of SWE&apos;s service philosophy.
+              The proposal experience focuses on simple communication,
+              transparent shipment steps and easy access to support.
             </p>
           </div>
         </div>
@@ -167,16 +166,16 @@ export default function Home() {
       <section className="network-section" id="network">
         <div className="container network-grid">
           <div className="network-intro">
-            <p className="section-label">Our footprint</p>
-            <h2>Local teams. Connected reach.</h2>
+            <p className="section-label">Illustrative network</p>
+            <h2>Key South African logistics centres.</h2>
           </div>
 
           <div className="branch-list">
-            {["Durban","Johannesburg","Cape Town","Nelspruit"].map((city, index) => (
+            {["Johannesburg","Durban","Cape Town","Nelspruit"].map((city, index) => (
               <div className="branch-row" key={city}>
                 <span>0{index + 1}</span>
                 <strong>{city}</strong>
-                <em>South Africa</em>
+                <em>Demo coverage</em>
               </div>
             ))}
           </div>
@@ -186,23 +185,15 @@ export default function Home() {
       <section className="resources-section" id="resources">
         <div className="container resource-grid">
           <div className="resource-intro">
-            <p className="section-label">Customer resources</p>
-            <h2>Everything you need, without the runaround.</h2>
+            <p className="section-label">Customer tools</p>
+            <h2>Everything important stays inside SWE Red.</h2>
           </div>
 
           <div className="resource-links">
-            <a href="/track">
-              <span>Track a shipment</span><Arrow />
-            </a>
-            <a href="/documents">
-              <span>Shipping documents</span><Arrow />
-            </a>
-            <a href="/documents">
-              <span>Account application</span><Arrow />
-            </a>
-            <a href="/documents">
-              <span>Conditions of carriage</span><Arrow />
-            </a>
+            <a href="/track"><span>Demo shipment tracking</span><Arrow /></a>
+            <a href="/documents"><span>Shipping documents</span><Arrow /></a>
+            <a href="/documents"><span>Account application</span><Arrow /></a>
+            <a href="/documents"><span>Compliance resources</span><Arrow /></a>
           </div>
         </div>
       </section>
@@ -211,12 +202,12 @@ export default function Home() {
         <div className="container quote-grid">
           <div>
             <p className="section-label section-label-light">Start moving</p>
-            <h2>Tell us where it needs to go.</h2>
+            <h2>Tell us what your shipment needs.</h2>
           </div>
           <div className="quote-action">
             <p>
-              Speak to the SWE team about the right courier or freight solution
-              for your shipment.
+              Use the proposal quote flow to capture the route, shipment size
+              and required delivery speed.
             </p>
             <a href="/quote" className="button button-light">
               Request a quote <Arrow />
