@@ -55,8 +55,8 @@ export default function Home() {
             <a href="/about">About</a>
             <a href="/services">Services</a>
             <a href="#network">Network</a>
-            <a href="#resources">Documents</a>
-            <a href="#contact">Contact</a>
+            <a href="/documents">Documents</a>
+            <a href="/contact">Contact</a>
           </nav>
 
           <div className="header-actions">
@@ -74,8 +74,8 @@ export default function Home() {
               <a href="/about">About</a>
               <a href="/services">Services</a>
               <a href="#network">Network</a>
-              <a href="#resources">Documents</a>
-              <a href="#contact">Contact</a>
+              <a href="/documents">Documents</a>
+              <a href="/contact">Contact</a>
               <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer">Track shipment</a>
             </div>
           </details>
@@ -248,13 +248,13 @@ export default function Home() {
             <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer">
               <span>Track a shipment</span><Arrow />
             </a>
-            <a href="#contact">
+            <a href="/contact">
               <span>Shipping documents</span><Arrow />
             </a>
-            <a href="#contact">
+            <a href="/contact">
               <span>Account application</span><Arrow />
             </a>
-            <a href="#contact">
+            <a href="/contact">
               <span>Conditions of carriage</span><Arrow />
             </a>
           </div>
@@ -294,7 +294,7 @@ export default function Home() {
             <a href="/about">About</a>
             <a href="/services">Services</a>
             <a href="#network">Network</a>
-            <a href="#resources">Documents</a>
+            <a href="/documents">Documents</a>
           </div>
 
           <div className="footer-column">
