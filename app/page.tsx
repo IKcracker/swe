@@ -1,38 +1,27 @@
 const services = [
   {
-    number: "01",
     title: "Same Day Express",
-    description:
-      "Priority door-to-door delivery for urgent shipments moving between major destinations.",
-    meta: "Urgent delivery",
+    eyebrow: "Urgent",
+    copy: "Priority door-to-door delivery between major centres when tomorrow is too late.",
+    className: "service-featured",
   },
   {
-    number: "02",
     title: "Overnight Express",
-    description:
-      "Dependable next-business-day delivery to major centres, with extended regional coverage.",
-    meta: "Next business day",
+    eyebrow: "Next business day",
+    copy: "Fast, dependable overnight delivery across SWE's major-centre network.",
+    className: "",
   },
   {
-    number: "03",
     title: "Road Freight",
-    description:
-      "A cost-effective option for larger consignments and deliveries where speed is less critical.",
-    meta: "Nationwide",
+    eyebrow: "Nationwide",
+    copy: "Cost-effective movement for larger or less time-sensitive consignments.",
+    className: "",
   },
   {
-    number: "04",
-    title: "International Courier",
-    description:
-      "Time-sensitive documents and parcels delivered internationally with experienced handling.",
-    meta: "Worldwide",
-  },
-  {
-    number: "05",
-    title: "Air Freight",
-    description:
-      "Flexible international freight solutions for larger shipments moving by air.",
-    meta: "Global freight",
+    title: "International",
+    eyebrow: "Worldwide",
+    copy: "Courier and airfreight solutions connecting South Africa to global destinations.",
+    className: "service-wide",
   },
 ];
 
@@ -63,13 +52,16 @@ function Brand() {
 export default function Home() {
   return (
     <main>
-      <section className="hero-shell">
-        <header className="site-header">
-          <a href="#" aria-label="Specialised Worldwide Express home">
+      <section className="hero">
+        <div className="hero-backdrop" />
+        <div className="hero-shade" />
+
+        <header className="header">
+          <a href="#" aria-label="SWE home">
             <Brand />
           </a>
 
-          <nav className="desktop-nav" aria-label="Primary navigation">
+          <nav className="nav" aria-label="Primary navigation">
             <a href="#about">About</a>
             <a href="#services">Services</a>
             <a href="#coverage">Coverage</a>
@@ -77,23 +69,23 @@ export default function Home() {
             <a href="#contact">Contact</a>
           </nav>
 
-          <div className="header-actions">
+          <div className="header-right">
             <a
-              className="header-track"
               href="https://swe.pperfect.com/"
               target="_blank"
               rel="noreferrer"
+              className="track-link"
             >
               Track shipment
             </a>
-            <a className="button button-orange button-compact" href="#quote">
+            <a href="#quote" className="quote-link">
               Get a quote
               <Arrow />
             </a>
           </div>
 
-          <details className="mobile-nav">
-            <summary aria-label="Open navigation">
+          <details className="mobile-menu">
+            <summary aria-label="Open menu">
               <span />
               <span />
             </summary>
@@ -110,234 +102,237 @@ export default function Home() {
           </details>
         </header>
 
-        <div className="hero">
-          <div className="hero-content">
-            <p className="eyebrow">South African courier & freight</p>
-
+        <div className="hero-inner">
+          <div className="hero-copy">
+            <p className="eyebrow">Courier • Freight • Express</p>
             <h1>
-              Move anything.
-              <span>Move it well.</span>
+              Built to move
+              <span>what matters.</span>
             </h1>
-
             <p className="hero-lead">
-              Domestic and international courier, freight and express delivery
-              solutions built around reliability, reach and responsive service.
+              Reliable delivery across South Africa and beyond, backed by
+              responsive service and logistics expertise.
             </p>
-
-            <div className="hero-actions">
-              <a className="button button-orange" href="#quote">
+            <div className="hero-buttons">
+              <a href="#quote" className="primary-button">
                 Request a quote
                 <Arrow />
               </a>
               <a
-                className="button button-outline"
                 href="https://swe.pperfect.com/"
                 target="_blank"
                 rel="noreferrer"
+                className="secondary-button"
               >
                 Track a shipment
               </a>
             </div>
-
-            <div className="hero-proof">
-              <div>
-                <strong>Domestic</strong>
-                <span>Express & road freight</span>
-              </div>
-              <div>
-                <strong>International</strong>
-                <span>Courier & air freight</span>
-              </div>
-              <div>
-                <strong>Cross-border</strong>
-                <span>Southern Africa</span>
-              </div>
-            </div>
           </div>
 
-          <div className="hero-media">
-            <div className="hero-image" />
-            <div className="hero-media-caption">
-              <span>Specialised Worldwide Express</span>
-              <span>South Africa → Worldwide</span>
+          <div className="hero-bottom">
+            <div className="hero-stat">
+              <span>01</span>
+              <strong>Domestic express</strong>
+            </div>
+            <div className="hero-stat">
+              <span>02</span>
+              <strong>Road freight</strong>
+            </div>
+            <div className="hero-stat">
+              <span>03</span>
+              <strong>International</strong>
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="track-panel">
-          <div className="track-panel-intro">
-            <span>Track & trace</span>
-            <strong>Find your shipment</strong>
+      <section className="tracking-strip">
+        <div className="container tracking-inner">
+          <div>
+            <span className="mini-label">Track & trace</span>
+            <h2>Where is your shipment?</h2>
           </div>
 
           <form
             action="https://swe.pperfect.com/"
             method="get"
             target="_blank"
-            className="track-form"
+            className="tracking-form"
           >
             <label>
               <span className="sr-only">Waybill number</span>
-              <input name="waybill" placeholder="Enter waybill number" />
+              <input name="waybill" placeholder="Enter your waybill number" />
             </label>
             <button type="submit">
-              Track shipment
+              Track now
               <Arrow />
             </button>
           </form>
-
-          <div className="track-help">
-            <span>Need help?</span>
-            <a href="#contact">Contact our team</a>
-          </div>
         </div>
       </section>
 
-      <section className="statement-section" id="about">
-        <div className="container statement-layout">
-          <div className="section-label">Who we are</div>
-          <div className="statement-copy">
+      <section className="about-section" id="about">
+        <div className="container about-layout">
+          <div className="about-label">
+            <span>About SWE</span>
+          </div>
+
+          <div className="about-main">
             <h2>
-              A logistics partner built for businesses that cannot afford to
-              stand still.
+              Logistics should feel simple,
+              <span>even when the journey is not.</span>
             </h2>
-            <div className="statement-detail">
+
+            <div className="about-details">
               <p>
-                SWE provides domestic and international courier, express and
-                freight solutions from major South African centres to regional
-                and worldwide destinations.
+                Specialised Worldwide Express provides domestic and
+                international courier, express and freight solutions from major
+                South African centres to regional and worldwide destinations.
               </p>
-              <a href="#services" className="text-arrow">
-                Explore our services
-                <Arrow />
-              </a>
+
+              <div className="about-points">
+                <div>
+                  <strong>South Africa</strong>
+                  <span>Major-centre and regional delivery</span>
+                </div>
+                <div>
+                  <strong>Southern Africa</strong>
+                  <span>Cross-border road freight</span>
+                </div>
+                <div>
+                  <strong>Worldwide</strong>
+                  <span>Courier and airfreight capability</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section className="services-section" id="services">
-        <div className="container">
-          <div className="section-heading">
-            <div>
-              <p className="section-label">What we move</p>
-              <h2>Delivery options for every level of urgency.</h2>
-            </div>
+        <div className="container services-heading">
+          <p className="mini-label">Our services</p>
+          <div>
+            <h2>Choose the right way to move.</h2>
             <p>
-              From documents that need to arrive today to larger consignments
-              moving across borders, choose the service that matches your
-              timeline.
+              From urgent documents to heavy freight, SWE gives you practical
+              delivery options without unnecessary complexity.
             </p>
           </div>
+        </div>
 
-          <div className="service-list">
-            {services.map((service) => (
-              <a className="service-row" href="#quote" key={service.title}>
-                <span className="service-number">{service.number}</span>
-                <div className="service-title">
-                  <h3>{service.title}</h3>
-                  <span>{service.meta}</span>
-                </div>
-                <p>{service.description}</p>
-                <span className="service-arrow">
-                  <Arrow />
-                </span>
-              </a>
-            ))}
-          </div>
-
-          <div className="service-footer">
-            <p>Need a different shipping solution?</p>
-            <a className="text-arrow" href="#contact">
-              Talk to our team
-              <Arrow />
+        <div className="container service-grid">
+          {services.map((service, index) => (
+            <a
+              href="#quote"
+              className={`service-block ${service.className}`}
+              key={service.title}
+            >
+              <div className="service-top">
+                <span className="service-index">0{index + 1}</span>
+                <span className="service-eyebrow">{service.eyebrow}</span>
+              </div>
+              <div className="service-bottom">
+                <h3>{service.title}</h3>
+                <p>{service.copy}</p>
+              </div>
+              <span className="service-arrow">
+                <Arrow />
+              </span>
             </a>
-          </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="image-break">
+        <div className="image-break-photo" />
+        <div className="image-break-content">
+          <p className="mini-label">Built around reliability</p>
+          <h2>From collection to final delivery.</h2>
+          <p>
+            Whether it is time-critical courier work or planned freight, we
+            focus on getting the basics right: communication, movement and
+            delivery.
+          </p>
+          <a href="#quote" className="text-link-arrow">
+            Start a shipment
+            <Arrow />
+          </a>
         </div>
       </section>
 
       <section className="coverage-section" id="coverage">
-        <div className="container coverage-layout">
-          <div className="coverage-content">
-            <p className="section-label section-label-light">Our network</p>
-            <h2>Local reach. International capability.</h2>
-            <p className="coverage-lead">
-              Connect major South African centres, regional destinations and
-              international markets through one experienced logistics partner.
-            </p>
-
-            <div className="coverage-cities">
-              <div>
-                <span>01</span>
-                <strong>Johannesburg</strong>
-              </div>
-              <div>
-                <span>02</span>
-                <strong>Durban</strong>
-              </div>
-              <div>
-                <span>03</span>
-                <strong>Cape Town</strong>
-              </div>
-              <div>
-                <span>04</span>
-                <strong>Nelspruit</strong>
-              </div>
-            </div>
+        <div className="container coverage-heading">
+          <div>
+            <p className="mini-label mini-label-light">Our network</p>
+            <h2>South Africa connected.</h2>
           </div>
+          <p>
+            SWE operates from key South African centres with regional and
+            international connections that extend your reach beyond the major
+            routes.
+          </p>
+        </div>
 
-          <div className="coverage-visual" aria-hidden="true">
-            <div className="coverage-line line-one" />
-            <div className="coverage-line line-two" />
-            <div className="coverage-line line-three" />
-            <span className="coverage-dot dot-one" />
-            <span className="coverage-dot dot-two" />
-            <span className="coverage-dot dot-three" />
-            <span className="coverage-dot dot-four" />
-            <div className="coverage-badge">
-              <small>Coverage</small>
-              <strong>SA → WORLD</strong>
-            </div>
+        <div className="container coverage-grid">
+          <div className="city">
+            <span>JHB</span>
+            <strong>Johannesburg</strong>
+          </div>
+          <div className="city">
+            <span>DUR</span>
+            <strong>Durban</strong>
+          </div>
+          <div className="city">
+            <span>CPT</span>
+            <strong>Cape Town</strong>
+          </div>
+          <div className="city">
+            <span>MQP</span>
+            <strong>Nelspruit</strong>
+          </div>
+          <div className="city city-world">
+            <span>INTL</span>
+            <strong>Worldwide connections</strong>
           </div>
         </div>
       </section>
 
       <section className="resources-section" id="resources">
-        <div className="container">
-          <div className="resources-heading">
-            <p className="section-label">Customer tools</p>
-            <h2>Everything you need to keep shipments moving.</h2>
+        <div className="container resources-layout">
+          <div className="resources-title">
+            <p className="mini-label">Customer tools</p>
+            <h2>Useful links, without the clutter.</h2>
           </div>
 
-          <div className="resource-grid">
+          <div className="resource-list">
             <a
-              className="resource-card resource-card-dark"
               href="https://swe.pperfect.com/"
               target="_blank"
               rel="noreferrer"
             >
-              <span className="resource-index">01</span>
+              <span>01</span>
               <div>
-                <h3>Track & trace</h3>
-                <p>Check the progress of an existing SWE shipment online.</p>
+                <strong>Track & trace</strong>
+                <small>Check your shipment status</small>
               </div>
               <Arrow />
             </a>
 
-            <a className="resource-card" href="#contact">
-              <span className="resource-index">02</span>
+            <a href="#contact">
+              <span>02</span>
               <div>
-                <h3>Shipping documents</h3>
-                <p>Access customer forms and useful shipment information.</p>
+                <strong>Shipping documents</strong>
+                <small>Forms and shipment information</small>
               </div>
               <Arrow />
             </a>
 
-            <a className="resource-card" href="#contact">
-              <span className="resource-index">03</span>
+            <a href="#contact">
+              <span>03</span>
               <div>
-                <h3>Customer support</h3>
-                <p>Speak to the SWE team about a shipment or service.</p>
+                <strong>Customer support</strong>
+                <small>Speak to the SWE team</small>
               </div>
               <Arrow />
             </a>
@@ -348,17 +343,18 @@ export default function Home() {
       <section className="quote-section" id="quote">
         <div className="container quote-layout">
           <div>
-            <p className="section-label section-label-light">Start a shipment</p>
-            <h2>Where do you need it to go?</h2>
+            <p className="mini-label mini-label-light">Ready when you are</p>
+            <h2>Let&apos;s get it moving.</h2>
           </div>
-          <div className="quote-copy">
+
+          <div>
             <p>
-              Tell us where it is going, what you are sending and how quickly it
-              needs to arrive. We will help you choose the right service.
+              Tell us what you are sending, where it is going and when it needs
+              to arrive.
             </p>
             <a
-              className="button button-light"
               href="mailto:info@swe.co.za?subject=SWE%20Quote%20Request"
+              className="quote-button"
             >
               Request a quote
               <Arrow />
@@ -367,8 +363,8 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="site-footer" id="contact">
-        <div className="container footer-top">
+      <footer className="footer" id="contact">
+        <div className="container footer-grid">
           <div className="footer-brand">
             <Brand />
             <p>
@@ -377,35 +373,34 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="footer-column">
-            <strong>Company</strong>
-            <a href="#about">About SWE</a>
+          <div className="footer-col">
+            <strong>Explore</strong>
+            <a href="#about">About</a>
             <a href="#services">Services</a>
             <a href="#coverage">Coverage</a>
-          </div>
-
-          <div className="footer-column">
-            <strong>Tools</strong>
-            <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer">
-              Track shipment
-            </a>
-            <a href="#quote">Request a quote</a>
             <a href="#resources">Resources</a>
           </div>
 
-          <div className="footer-column">
-            <strong>Contact</strong>
-            <a href="mailto:info@swe.co.za">info@swe.co.za</a>
+          <div className="footer-col">
+            <strong>Actions</strong>
+            <a
+              href="https://swe.pperfect.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Track shipment
+            </a>
+            <a href="#quote">Get a quote</a>
+            <a href="mailto:info@swe.co.za">Email us</a>
+          </div>
+
+          <div className="footer-col">
+            <strong>South Africa</strong>
             <span>Johannesburg</span>
             <span>Durban</span>
             <span>Cape Town</span>
             <span>Nelspruit</span>
           </div>
-        </div>
-
-        <div className="container footer-bottom">
-          <span>Specialised Worldwide Express</span>
-          <span>South Africa</span>
         </div>
       </footer>
     </main>
