@@ -73,6 +73,18 @@ export default function ServicesPage() {
             <a href="/track" className="track-link">Track shipment</a>
             <Link href="/quote" className="header-cta">Get a quote <Arrow /></Link>
           </div>
+          <details className="mobile-menu">
+            <summary aria-label="Open menu"><span /><span /></summary>
+            <div>
+              <Link href="/about">About</Link>
+              <Link href="/services">Services</Link>
+              <Link href="/documents">Documents</Link>
+              <Link href="/careers">Careers</Link>
+              <Link href="/contact">Contact</Link>
+              <Link href="/track">Track shipment</Link>
+              <Link href="/quote">Get a quote</Link>
+            </div>
+          </details>
         </div>
       </header>
 
