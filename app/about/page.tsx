@@ -53,8 +53,8 @@ export default function AboutPage() {
           </nav>
 
           <div className="header-actions">
-            <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer" className="track-link">Track shipment</a>
-            <Link href="/#quote" className="header-cta">Get a quote <Arrow /></Link>
+            <a href="/track" className="track-link">Track shipment</a>
+            <Link href="/quote" className="header-cta">Get a quote <Arrow /></Link>
           </div>
         </div>
       </header>
