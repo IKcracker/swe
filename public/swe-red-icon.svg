@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title">
+<title id="title">SWE Red icon</title>
+<rect width="120" height="120" rx="24" fill="#111318"/>
+<path d="M18 27h83L87 49H50l-5 9h38L69 80H12l14-22h-5l14-22h-4z" fill="#d71920"/>
+<text x="24" y="101" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="800" letter-spacing="1" fill="#fff">SWE</text>
+</svg>
