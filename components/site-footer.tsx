@@ -8,10 +8,11 @@ function Arrow() {
   );
 }
 
-function Mark() {
+function RedMark() {
   return (
-    <span className="swe-mark" aria-hidden="true">
-      <span>S</span><span>W</span><span>E</span>
+    <span className="red-brand-mark" aria-hidden="true">
+      <strong>SWE</strong>
+      <small>RED</small>
     </span>
   );
 }
@@ -22,8 +23,8 @@ export function SiteFooter() {
       <div className="footer-cta">
         <div className="container footer-cta-inner">
           <div>
-            <span className="footer-kicker">Ready to move?</span>
-            <h2>Let&apos;s get your shipment moving.</h2>
+            <span className="footer-kicker">Move with SWE Red</span>
+            <h2>Built for the next shipment.</h2>
           </div>
 
           <div className="footer-cta-actions">
@@ -40,31 +41,31 @@ export function SiteFooter() {
       <div className="container footer-content">
         <div className="footer-brand-block">
           <div className="footer-brand">
-            <Mark />
+            <RedMark />
             <div>
-              <strong>Siyanqoba Worldwide Express</strong>
-              <span>Courier • Freight • Airfreight</span>
+              <strong>SWE Red Logistics Network</strong>
+              <span>Courier • Freight • Logistics</span>
             </div>
           </div>
 
           <p>
-            Domestic and international courier, express and freight solutions
-            connecting South African businesses to regional and worldwide destinations.
+            A proposal-ready logistics brand concept for domestic, regional and
+            international shipment services.
           </p>
 
           <div className="footer-service-line">
-            <span>South Africa</span>
+            <span>Domestic</span>
             <i />
-            <span>Southern Africa</span>
+            <span>Regional</span>
             <i />
-            <span>Worldwide</span>
+            <span>Global</span>
           </div>
         </div>
 
         <div className="footer-nav-group">
           <div className="footer-column">
             <strong>Company</strong>
-            <Link href="/about">About SWE</Link>
+            <Link href="/about">About SWE Red</Link>
             <Link href="/services">Services</Link>
             <Link href="/careers">Careers</Link>
             <Link href="/contact">Contact</Link>
@@ -79,20 +80,19 @@ export function SiteFooter() {
           </div>
 
           <div className="footer-column footer-contact-column">
-            <strong>Get in touch</strong>
-            <a href="mailto:info@swe.co.za">info@swe.co.za</a>
-            <a href="tel:+27315696808">031 569 6808</a>
-            <span>Riverhorse Valley</span>
-            <span>Durban, South Africa</span>
+            <strong>Proposal demo</strong>
+            <span>Contact details configured at launch</span>
+            <span>Tracking API connected at launch</span>
+            <span>Compliance documents supplied by client</span>
           </div>
         </div>
       </div>
 
       <div className="container footer-bottom">
-        <span>© {new Date().getFullYear()} Siyanqoba Worldwide Express</span>
+        <span>© {new Date().getFullYear()} SWE Red Logistics Network</span>
         <div>
           <Link href="/documents">Privacy & compliance</Link>
-          <span>8 Days a Week</span>
+          <span>Concept website</span>
         </div>
       </div>
     </footer>
