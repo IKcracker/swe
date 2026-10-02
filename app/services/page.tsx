@@ -64,8 +64,8 @@ export default function ServicesPage() {
             <Link href="/about">About</Link>
             <Link href="/services">Services</Link>
             <Link href="/#network">Network</Link>
-            <Link href="/#resources">Documents</Link>
-            <Link href="/#contact">Contact</Link>
+            <Link href="/documents">Documents</Link>
+            <Link href="/contact">Contact</Link>
           </nav>
 
           <div className="header-actions">
