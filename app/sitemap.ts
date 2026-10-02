@@ -1,18 +1,8 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.swe.co.za";
-
-  const routes = [
-    "",
-    "/about",
-    "/services",
-    "/documents",
-    "/careers",
-    "/contact",
-    "/quote",
-    "/track",
-  ];
+  const baseUrl = "https://swe-red.vercel.app";
+  const routes = ["","/about","/services","/documents","/careers","/contact","/quote","/track"];
 
   return routes.map((route) => ({
     url: `${baseUrl}${route}`,
