@@ -3,8 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Track a Shipment",
-  description:
-    "Track an SWE courier or freight shipment using your waybill number.",
+  description: "Use the SWE Red internal demo tracking interface.",
 };
 
 function Arrow() {
@@ -15,61 +14,56 @@ function Arrow() {
   );
 }
 
+export default async function TrackPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ ref?: string }>;
+}) {
+  const { ref } = await searchParams;
+  const reference = ref?.trim();
 
-export default function TrackPage() {
   return (
     <main>
-
       <section className="track-page-section">
         <div className="container track-page-grid">
           <div className="track-page-copy">
-            <p className="section-label">Track & trace</p>
-            <h1>Track your shipment.</h1>
+            <p className="section-label">SWE Red track & trace</p>
+            <h1>Track without an external courier link.</h1>
             <p>
-              Enter your SWE waybill number below. Tracking is completed through
-              SWE's existing ParcelPerfect tracking service.
+              This self-contained demo interface is intentionally disconnected
+              from the original company&apos;s tracking platform.
             </p>
           </div>
 
           <div className="track-page-card">
-            <span>Shipment tracking</span>
-            <h2>Enter your waybill number</h2>
-            <form action="https://swe.pperfect.com/" method="get" target="_blank">
+            <span>Demo shipment tracking</span>
+            <h2>Enter a reference number</h2>
+            <form action="/track" method="get">
               <label>
-                <span className="sr-only">Waybill number</span>
-                <input
-                  name="waybill"
-                  autoComplete="off"
-                  placeholder="e.g. SWE123456"
-                  required
-                />
+                <span className="sr-only">Reference number</span>
+                <input name="ref" autoComplete="off" placeholder="e.g. RED-10294" defaultValue={reference} required />
               </label>
-              <button type="submit">
-                Track shipment <Arrow />
-              </button>
+              <button type="submit">Check demo status <Arrow /></button>
             </form>
-            <p>
-              Tracking will open in a new tab using SWE's live tracking system.
-            </p>
+
+            {reference ? (
+              <div className="demo-track-result">
+                <small>Demo result</small>
+                <strong>{reference.toUpperCase()}</strong>
+                <p>Status: In transit</p>
+                <span>This is sample proposal data, not a live shipment record.</span>
+              </div>
+            ) : (
+              <p>Enter any reference to preview the proposed tracking experience.</p>
+            )}
           </div>
         </div>
       </section>
 
       <section className="track-help-section">
         <div className="container track-help-grid">
-          <div>
-            <p className="section-label">Need assistance?</p>
-            <h2>Cannot find your waybill or tracking result?</h2>
-          </div>
-          <div>
-            <p>
-              Contact SWE with your shipment reference, collection details and
-              destination so the team can assist.
-            </p>
-            <Link href="/contact" className="button button-dark">
-              Contact SWE <Arrow />
-            </Link>
-          </div>
+          <div><p className="section-label">Production integration</p><h2>Connect the client&apos;s own tracking API at launch.</h2></div>
+          <div><p>The finished system can use the client&apos;s approved courier, TMS or parcel-tracking provider without changing this user experience.</p><Link href="/contact" className="button button-dark">Contact setup <Arrow /></Link></div>
         </div>
       </section>
     </main>
