@@ -3,10 +3,10 @@
 :root{
   --black:#0d0f12;
   --black-2:#171a1f;
-  --cream:#f4f0e8;
-  --paper:#fffdf8;
-  --orange:#f05a28;
-  --yellow:#f4c542;
+  --cream:#f3f4f6;
+  --paper:#ffffff;
+  --orange:#d71920;
+  --yellow:#ff5a5f;
   --text:#13161a;
   --muted:#6d706f;
   --line:rgba(19,22,26,.12);
@@ -520,3 +520,28 @@ var(--cream);border-bottom:1px solid var(--line)}
 .hero-copy{position:relative}
 .hero-copy::after{content:"";position:absolute;left:max(32px,calc((100vw - 1320px)/2));right:40px;bottom:74px;height:1px;background:rgba(19,22,26,.08)}
 .hero-footnote{position:relative;z-index:1}
+
+
+/* SWE Red rebrand */
+.brand-logo{width:210px;height:auto;display:block}
+.footer-logo{width:220px;height:auto;display:block}
+.red-brand-mark{display:inline-flex;align-items:center;gap:6px;background:var(--black);padding:9px 12px;border-radius:8px}
+.red-brand-mark strong{font-size:23px;letter-spacing:-.05em;color:#fff}
+.red-brand-mark small{font-size:9px;letter-spacing:.14em;color:#fff;background:var(--orange);padding:4px 6px;border-radius:4px}
+.resource-detail-copy{max-width:760px;padding:36px;background:var(--paper);border-top:5px solid var(--orange)}
+.resource-detail-copy>p{margin:0 0 24px;color:var(--muted);font-size:16px;line-height:1.8}
+.demo-track-result{margin-top:24px;padding:22px;background:#f7f7f8;border-left:4px solid var(--orange);display:grid;gap:7px}
+.demo-track-result small{font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:var(--orange);font-weight:800}
+.demo-track-result strong{font-size:20px}
+.demo-track-result p{margin:0!important;color:var(--text)!important;font-size:14px!important;font-weight:700}
+.demo-track-result span{font-size:11px;color:var(--muted);line-height:1.5}
+.document-row{color:inherit}
+.document-row:hover{color:var(--orange)}
+.footer-cta{background:var(--orange)}
+.utility-inner strong{color:#ff7a80}
+.inner-hero::after{border-color:rgba(215,25,32,.14)}
+@media(max-width:700px){
+  .brand-logo{width:170px}
+  .footer-logo{width:190px}
+  .resource-detail-copy{padding:24px}
+}
