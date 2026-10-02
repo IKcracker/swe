@@ -6,15 +6,19 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.swe.co.za"),
   title: { default: "SWE | Specialised Worldwide Express", template: "%s | SWE" },
   description: "Domestic and international courier, express delivery, road freight and logistics solutions from Specialised Worldwide Express.",
   keywords: ["SWE","Specialised Worldwide Express","courier South Africa","road freight","overnight express","international courier","logistics South Africa"],
+  alternates: { canonical: "/" },
   openGraph: {
     title: "SWE | Specialised Worldwide Express",
     description: "Courier, express delivery and freight solutions across South Africa and beyond.",
     type: "website",
-    locale: "en_ZA"
-  }
+    locale: "en_ZA",
+    url: "https://www.swe.co.za"
+  },
+  robots: { index: true, follow: true }
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
