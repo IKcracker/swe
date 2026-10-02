@@ -80,10 +80,10 @@ export default function ContactPage() {
           </nav>
 
           <div className="header-actions">
-            <a href="https://swe.pperfect.com/" target="_blank" rel="noreferrer" className="track-link">
+            <a href="/track" className="track-link">
               Track shipment
             </a>
-            <Link href="/#quote" className="header-cta">
+            <Link href="/quote" className="header-cta">
               Get a quote <Arrow />
             </Link>
           </div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
             <span>01</span>
             <h3>Need a quote?</h3>
             <p>Tell SWE what you are sending, where it is going and when it needs to arrive.</p>
-            <Link href="/#quote">Request a quote <Arrow /></Link>
+            <Link href="/quote">Request a quote <Arrow /></Link>
           </div>
 
           <div>
