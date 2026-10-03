@@ -15,7 +15,7 @@ SWE Red is a Next.js 16 logistics proposal site with a built-in shipment trackin
 
 The tracking system uses Supabase PostgreSQL through the Supabase REST API.
 
-The browser never receives the Supabase service-role key. Database access and admin mutations happen only in Next.js server code.
+The browser never receives the Supabase secret key. Database access and admin mutations happen only in Next.js server code.
 
 ### Data model
 
@@ -56,7 +56,7 @@ supabase/schema.sql
 
 The SQL creates the shipment tables, indexes, status constraints, timestamp trigger and row-level security.
 
-No public table policies are created. The app accesses the database from server code using the service-role key.
+No public table policies are created. The app accesses the database from server code using the secret key.
 
 ### 3. Add environment variables
 
@@ -70,12 +70,12 @@ Configure:
 
 ```env
 SUPABASE_URL=https://YOUR_PROJECT.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
+SUPABASE_SECRET_KEY=YOUR_SECRET_KEY
 SWE_ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
 SWE_ADMIN_SESSION_SECRET=USE_A_LONG_RANDOM_SECRET
 ```
 
-Never expose `SUPABASE_SERVICE_ROLE_KEY` to the browser and never prefix it with `NEXT_PUBLIC_`.
+Never expose `SUPABASE_SECRET_KEY` to the browser and never prefix it with `NEXT_PUBLIC_`.
 
 ### 4. Run locally
 
@@ -120,7 +120,7 @@ Redeploy after saving the variables.
 
 - Admin sessions use an HTTP-only signed cookie.
 - Shipment write operations require an authenticated admin session.
-- The Supabase service-role key remains server-side.
+- The Supabase secret key remains server-side.
 - Public tracking responses exclude recipient contact details.
 - `/admin` and `/api` are excluded from search-engine crawling.
 - For higher traffic, add distributed rate limiting to the public tracking endpoint and admin login.
