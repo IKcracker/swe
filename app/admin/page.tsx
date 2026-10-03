@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { requireAdmin } from "@/lib/admin-auth";
-import { isDatabaseConfigured, listShipments } from "@/lib/supabase-rest";
+import { isDatabaseConfigured, listQuoteRequests, listShipments } from "@/lib/supabase-rest";
 import { getStatusLabel, shipmentStatuses, type Shipment } from "@/lib/tracking";
+import type { QuoteRequest } from "@/lib/quotes";
 import { createShipmentAction } from "./actions";
 
 export const metadata = {
@@ -46,14 +47,18 @@ export default async function AdminPage({
   const { q = "", status = "ALL" } = await searchParams;
   const configured = isDatabaseConfigured();
   let shipments: Shipment[] = [];
+  let quotes: QuoteRequest[] = [];
   let loadError = "";
 
   if (configured) {
     try {
-      shipments = await listShipments(250);
+      [shipments, quotes] = await Promise.all([
+        listShipments(250),
+        listQuoteRequests(250),
+      ]);
     } catch (error) {
       console.error(error);
-      loadError = "The database is configured but shipments could not be loaded.";
+      loadError = "The database is configured but dashboard data could not be loaded.";
     }
   }
 
@@ -73,6 +78,9 @@ export default async function AdminPage({
   ).length;
   const attention = shipments.filter(
     (shipment) => shipment.status === "EXCEPTION"
+  ).length;
+  const quoteAttention = quotes.filter(
+    (quote) => quote.status === "NEW" || quote.status === "REVIEWING"
   ).length;
 
   const createPanel = (
@@ -222,6 +230,16 @@ export default async function AdminPage({
           </div>
           <strong>{attention}</strong>
           <small>Exceptions requiring action</small>
+        </article>
+        <article className={quoteAttention ? "metric-attention" : undefined}>
+          <div className="admin-metric-top">
+            <span>Quote requests</span>
+            <i className="metric-dot metric-dot-danger" />
+          </div>
+          <strong>{quoteAttention}</strong>
+          <small>
+            <Link href="/admin/quotes">New or reviewing quotes →</Link>
+          </small>
         </article>
       </section>
 
