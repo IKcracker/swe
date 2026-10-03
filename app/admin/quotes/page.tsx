@@ -56,8 +56,12 @@ export default async function QuotesPage({
     try {
       quotes = await listQuoteRequests(500);
     } catch (error) {
-      console.error(error);
-      loadError = "Quote requests could not be loaded.";
+      console.error("Quote requests load failed", error);
+      const message = error instanceof Error ? error.message : String(error);
+      loadError =
+        /quote_requests|PGRST205|42P01|schema cache/i.test(message)
+          ? "The quote_requests table is missing from Supabase. Run the latest supabase/schema.sql in the Supabase SQL Editor, then refresh this page."
+          : "Quote requests could not be loaded. Check the server log for the Supabase Data API error.";
     }
   }
 
