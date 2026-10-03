@@ -7,26 +7,13 @@ import {
   getShipmentEvents,
   isDatabaseConfigured,
 } from "@/lib/supabase-rest";
-import {
-  getStatusLabel,
-  shipmentStatuses,
-  type ShipmentStatus,
-} from "@/lib/tracking";
+import { getStatusLabel, shipmentStatuses } from "@/lib/tracking";
 import { updateShipmentAction } from "../../actions";
 
 export const metadata = {
-  title: "Shipment Details",
+  title: "Shipment Record",
   robots: { index: false, follow: false },
 };
-
-const journeyStatuses: ShipmentStatus[] = [
-  "BOOKED",
-  "COLLECTED",
-  "IN_TRANSIT",
-  "AT_HUB",
-  "OUT_FOR_DELIVERY",
-  "DELIVERED",
-];
 
 function formatDate(value: string | null) {
   if (!value) return "—";
@@ -41,12 +28,6 @@ function datetimeLocalValue(value: string | null) {
   const date = new Date(value);
   const offset = date.getTimezoneOffset();
   return new Date(date.getTime() - offset * 60_000).toISOString().slice(0, 16);
-}
-
-function getJourneyProgress(status: ShipmentStatus) {
-  const index = journeyStatuses.indexOf(status);
-  if (index < 0) return 0;
-  return Math.round((index / (journeyStatuses.length - 1)) * 100);
 }
 
 export default async function ShipmentDetailPage({
@@ -78,11 +59,9 @@ export default async function ShipmentDetailPage({
   if (!shipment) notFound();
 
   const events = await getShipmentEvents(id);
-  const progress = getJourneyProgress(shipment.status);
-  const latestEvent = events[0];
 
   const pageActions = (
-    <div className="shipment-page-actions">
+    <div className="shipment-record-actions">
       <Link href="/admin/shipments" className="admin-secondary-link">
         ← Shipments
       </Link>
@@ -95,15 +74,16 @@ export default async function ShipmentDetailPage({
         Customer view ↗
       </Link>
 
-      <details className="shipment-update-drawer">
+      <details className="shipment-record-update">
         <summary>Update shipment</summary>
-        <div className="shipment-update-drawer-panel">
-          <div className="shipment-update-drawer-head">
+
+        <div className="shipment-record-update-panel">
+          <div className="shipment-record-update-head">
             <div>
-              <span className="admin-section-kicker">Tracking update</span>
-              <h2>Publish shipment update</h2>
+              <span>Shipment update</span>
+              <h2>{shipment.tracking_number}</h2>
             </div>
-            <small>{shipment.tracking_number}</small>
+            <small>{getStatusLabel(shipment.status)}</small>
           </div>
 
           <form action={updateShipmentAction} className="admin-form-stack">
@@ -139,7 +119,7 @@ export default async function ShipmentDetailPage({
             </label>
 
             <label>
-              <span>Customer-facing update *</span>
+              <span>Public tracking update *</span>
               <input
                 name="event_title"
                 required
@@ -152,7 +132,7 @@ export default async function ShipmentDetailPage({
               <textarea
                 name="event_description"
                 rows={5}
-                placeholder="Optional tracking information"
+                placeholder="Optional information visible on tracking"
               />
             </label>
 
@@ -167,7 +147,7 @@ export default async function ShipmentDetailPage({
 
   return (
     <AdminShell
-      title="Shipment details"
+      title="Shipment record"
       description={shipment.tracking_number}
       section="shipments"
       actions={pageActions}
@@ -178,215 +158,210 @@ export default async function ShipmentDetailPage({
         </div>
       ) : null}
 
-      <section className="shipment-command-header">
-        <div className="shipment-command-primary">
-          <div className="shipment-command-id">
-            <span className="admin-section-kicker">Tracking number</span>
-            <h2>{shipment.tracking_number}</h2>
-            <p>
-              {shipment.customer_reference
-                ? `Customer ref: ${shipment.customer_reference}`
-                : "No customer reference"}
-            </p>
-          </div>
+      <div className="shipment-record">
+        <header className="shipment-record-header">
+          <div className="shipment-record-heading">
+            <div>
+              <span className="shipment-record-label">Tracking number</span>
+              <h2>{shipment.tracking_number}</h2>
+            </div>
 
-          <div className="shipment-command-state">
-            <span className={`status-pill status-${shipment.status.toLowerCase()}`}>
+            <span
+              className={`status-pill status-${shipment.status.toLowerCase()}`}
+            >
               {getStatusLabel(shipment.status)}
             </span>
-            <small>Updated {formatDate(shipment.updated_at)}</small>
           </div>
-        </div>
 
-        <div className="shipment-command-route">
-          <div className="shipment-command-stop">
-            <small>Origin</small>
+          <div className="shipment-record-subhead">
+            <span>
+              Customer reference:
+              <strong>{shipment.customer_reference || " —"}</strong>
+            </span>
+            <span>
+              Last updated:
+              <strong>{formatDate(shipment.updated_at)}</strong>
+            </span>
+          </div>
+        </header>
+
+        <section className="shipment-route-band">
+          <div className="shipment-route-location">
+            <span>Origin</span>
             <strong>{shipment.origin}</strong>
           </div>
 
-          <div className="shipment-command-route-line">
-            <span />
-            <i />
-            <em>{shipment.current_location || "In network"}</em>
-            <i />
-            <span />
+          <div className="shipment-route-middle">
+            <div className="shipment-route-line" />
+            <span>{shipment.current_location || "In network"}</span>
           </div>
 
-          <div className="shipment-command-stop shipment-command-stop-end">
-            <small>Destination</small>
+          <div className="shipment-route-location shipment-route-location-end">
+            <span>Destination</span>
             <strong>{shipment.destination}</strong>
           </div>
-        </div>
+        </section>
 
-        <div className="shipment-command-meta">
+        <section className="shipment-record-facts">
           <div>
-            <small>Service</small>
+            <span>Service</span>
             <strong>{shipment.service_type}</strong>
           </div>
           <div>
-            <small>Estimated delivery</small>
+            <span>Estimated delivery</span>
             <strong>{formatDate(shipment.estimated_delivery)}</strong>
           </div>
           <div>
-            <small>Packages</small>
+            <span>Packages</span>
             <strong>{shipment.package_count}</strong>
           </div>
           <div>
-            <small>Weight</small>
-            <strong>{shipment.weight_kg ? `${shipment.weight_kg} kg` : "—"}</strong>
+            <span>Weight</span>
+            <strong>
+              {shipment.weight_kg ? `${shipment.weight_kg} kg` : "—"}
+            </strong>
           </div>
-        </div>
-      </section>
-
-      <section className="shipment-progress-section">
-        <div className="shipment-progress-head">
           <div>
-            <span className="admin-section-kicker">Delivery journey</span>
-            <h2>Shipment progress</h2>
+            <span>Created</span>
+            <strong>{formatDate(shipment.created_at)}</strong>
           </div>
-          {shipment.status === "EXCEPTION" || shipment.status === "CANCELLED" ? (
-            <span className="shipment-progress-alert">
-              {getStatusLabel(shipment.status)}
-            </span>
-          ) : (
-            <strong>{progress}%</strong>
-          )}
-        </div>
+        </section>
 
-        <div className="shipment-progress-track">
-          <div
-            className="shipment-progress-fill"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-
-        <div className="shipment-progress-steps">
-          {journeyStatuses.map((status, index) => {
-            const currentIndex = journeyStatuses.indexOf(shipment.status);
-            const complete = currentIndex >= index && currentIndex >= 0;
-            const current = shipment.status === status;
-
-            return (
-              <div
-                key={status}
-                className={[
-                  "shipment-progress-step",
-                  complete ? "is-complete" : "",
-                  current ? "is-current" : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-              >
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{getStatusLabel(status)}</strong>
+        <div className="shipment-record-body">
+          <main className="shipment-record-main">
+            <div className="shipment-record-section-title">
+              <div>
+                <span>Operational history</span>
+                <h3>Tracking activity</h3>
               </div>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="shipment-command-layout">
-        <div className="shipment-command-main">
-          <div className="shipment-command-section-head">
-            <div>
-              <span className="admin-section-kicker">Activity</span>
-              <h2>Tracking history</h2>
+              <strong>
+                {events.length} event{events.length === 1 ? "" : "s"}
+              </strong>
             </div>
-            <span>{events.length} update{events.length === 1 ? "" : "s"}</span>
-          </div>
 
-          {latestEvent ? (
-            <article className="shipment-latest-update">
-              <div>
-                <span>Latest update</span>
-                <strong>{latestEvent.title}</strong>
-                <p>
-                  {getStatusLabel(latestEvent.status)}
-                  {latestEvent.location ? ` • ${latestEvent.location}` : ""}
-                </p>
+            <div className="shipment-event-log">
+              <div className="shipment-event-log-head">
+                <span>Date & time</span>
+                <span>Status</span>
+                <span>Location</span>
+                <span>Activity</span>
               </div>
-              <time>{formatDate(latestEvent.event_time)}</time>
-            </article>
-          ) : null}
 
-          <div className="shipment-activity-feed">
-            {events.map((event, index) => (
-              <article key={event.id}>
-                <div className={`shipment-activity-marker ${index === 0 ? "is-latest" : ""}`}>
-                  <span />
-                </div>
+              {events.map((event) => (
+                <article key={event.id}>
+                  <time>{formatDate(event.event_time)}</time>
 
-                <div className="shipment-activity-content">
-                  <div className="shipment-activity-top">
-                    <strong>{event.title}</strong>
-                    <time>{formatDate(event.event_time)}</time>
+                  <div>
+                    <span
+                      className={`status-pill status-${event.status.toLowerCase()}`}
+                    >
+                      {getStatusLabel(event.status)}
+                    </span>
                   </div>
-                  <p>
-                    {getStatusLabel(event.status)}
-                    {event.location ? ` • ${event.location}` : ""}
-                  </p>
-                  {event.description ? <span>{event.description}</span> : null}
+
+                  <strong>{event.location || "—"}</strong>
+
+                  <div className="shipment-event-description">
+                    <strong>{event.title}</strong>
+                    {event.description ? <p>{event.description}</p> : null}
+                  </div>
+                </article>
+              ))}
+
+              {!events.length ? (
+                <div className="shipment-event-empty">
+                  <strong>No tracking activity yet</strong>
+                  <span>
+                    Use Update shipment to publish the first tracking event.
+                  </span>
                 </div>
-              </article>
-            ))}
+              ) : null}
+            </div>
+          </main>
 
-            {!events.length ? (
-              <div className="shipment-activity-empty">
-                <strong>No tracking activity yet.</strong>
-                <span>Use “Update shipment” to publish the first event.</span>
+          <aside className="shipment-record-sidebar">
+            <section>
+              <div className="shipment-record-section-title compact">
+                <div>
+                  <span>Recipient</span>
+                  <h3>Delivery contact</h3>
+                </div>
               </div>
-            ) : null}
-          </div>
+
+              <dl className="shipment-record-dl">
+                <div>
+                  <dt>Name</dt>
+                  <dd>{shipment.recipient_name || "Not provided"}</dd>
+                </div>
+                <div>
+                  <dt>Email</dt>
+                  <dd>
+                    {shipment.recipient_email ? (
+                      <a href={`mailto:${shipment.recipient_email}`}>
+                        {shipment.recipient_email}
+                      </a>
+                    ) : (
+                      "Not provided"
+                    )}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Phone</dt>
+                  <dd>
+                    {shipment.recipient_phone ? (
+                      <a href={`tel:${shipment.recipient_phone}`}>
+                        {shipment.recipient_phone}
+                      </a>
+                    ) : (
+                      "Not provided"
+                    )}
+                  </dd>
+                </div>
+              </dl>
+            </section>
+
+            <section>
+              <div className="shipment-record-section-title compact">
+                <div>
+                  <span>Operations</span>
+                  <h3>Record information</h3>
+                </div>
+              </div>
+
+              <dl className="shipment-record-dl">
+                <div>
+                  <dt>Shipment ID</dt>
+                  <dd className="shipment-record-id">{shipment.id}</dd>
+                </div>
+                <div>
+                  <dt>Current location</dt>
+                  <dd>{shipment.current_location || "In network"}</dd>
+                </div>
+                <div>
+                  <dt>Service</dt>
+                  <dd>{shipment.service_type}</dd>
+                </div>
+                <div>
+                  <dt>Last updated</dt>
+                  <dd>{formatDate(shipment.updated_at)}</dd>
+                </div>
+              </dl>
+            </section>
+
+            <Link
+              href={`/track?ref=${encodeURIComponent(shipment.tracking_number)}`}
+              target="_blank"
+              className="shipment-record-public-link"
+            >
+              <div>
+                <span>Public tracking</span>
+                <strong>Open customer view</strong>
+              </div>
+              <span>↗</span>
+            </Link>
+          </aside>
         </div>
-
-        <aside className="shipment-command-aside">
-          <section className="shipment-side-section">
-            <span className="admin-section-kicker">Recipient</span>
-            <dl>
-              <div>
-                <dt>Name</dt>
-                <dd>{shipment.recipient_name || "Not provided"}</dd>
-              </div>
-              <div>
-                <dt>Email</dt>
-                <dd>{shipment.recipient_email || "Not provided"}</dd>
-              </div>
-              <div>
-                <dt>Phone</dt>
-                <dd>{shipment.recipient_phone || "Not provided"}</dd>
-              </div>
-            </dl>
-          </section>
-
-          <section className="shipment-side-section">
-            <span className="admin-section-kicker">Shipment record</span>
-            <dl>
-              <div>
-                <dt>Created</dt>
-                <dd>{formatDate(shipment.created_at)}</dd>
-              </div>
-              <div>
-                <dt>Last update</dt>
-                <dd>{formatDate(shipment.updated_at)}</dd>
-              </div>
-              <div>
-                <dt>Current location</dt>
-                <dd>{shipment.current_location || "In network"}</dd>
-              </div>
-            </dl>
-          </section>
-
-          <Link
-            href={`/track?ref=${encodeURIComponent(shipment.tracking_number)}`}
-            target="_blank"
-            className="shipment-public-preview"
-          >
-            <span>Customer tracking page</span>
-            <strong>Preview public view</strong>
-            <em>↗</em>
-          </Link>
-        </aside>
-      </section>
+      </div>
     </AdminShell>
   );
 }
