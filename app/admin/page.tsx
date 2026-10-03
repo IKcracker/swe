@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/admin-auth";
 import { isDatabaseConfigured, listShipments } from "@/lib/supabase-rest";
-import { getStatusLabel, shipmentStatuses } from "@/lib/tracking";
+import { getStatusLabel, shipmentStatuses, type Shipment } from "@/lib/tracking";
 import { createShipmentAction, logoutAdmin } from "./actions";
 
 export const metadata = {
@@ -21,7 +21,7 @@ export default async function AdminPage() {
   await requireAdmin();
 
   const configured = isDatabaseConfigured();
-  let shipments = [];
+  let shipments: Shipment[] = [];
   let loadError = "";
 
   if (configured) {
