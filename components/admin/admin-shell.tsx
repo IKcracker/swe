@@ -88,7 +88,7 @@ export function AdminShell({
             <span>Overview</span>
           </Link>
           <Link
-            href="/admin"
+            href="/admin/shipments"
             className={section === "shipments" ? "is-active" : undefined}
           >
             <BoxIcon />
