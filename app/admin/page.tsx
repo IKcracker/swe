@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { requireAdmin } from "@/lib/admin-auth";
 import { isDatabaseConfigured, listShipments } from "@/lib/supabase-rest";
-import { getStatusLabel, shipmentStatuses, type Shipment, type ShipmentStatus } from "@/lib/tracking";
+import { getStatusLabel, shipmentStatuses, type Shipment } from "@/lib/tracking";
 import { createShipmentAction } from "./actions";
 
 export const metadata = {
