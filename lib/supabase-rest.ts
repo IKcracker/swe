@@ -1,9 +1,50 @@
 import type { PublicShipment, Shipment, TrackingEvent } from "@/lib/tracking";
 import { normalizeTrackingNumber } from "@/lib/tracking";
 
+function normalizeSupabaseApiUrl(value?: string) {
+  const raw = value?.trim();
+  if (!raw) return "";
+
+  if (/^https?:\/\//i.test(raw)) {
+    return raw.replace(/\/$/, "");
+  }
+
+  if (/^postgres(?:ql)?:\/\//i.test(raw)) {
+    const parsed = new URL(raw);
+    const directMatch = parsed.hostname.match(
+      /^db\.([a-z0-9]+)\.supabase\.co$/i
+    );
+
+    if (directMatch?.[1]) {
+      return `https://${directMatch[1]}.supabase.co`;
+    }
+
+    const username = decodeURIComponent(parsed.username);
+    const projectRef = username.includes(".")
+      ? username.split(".").pop()
+      : undefined;
+
+    if (projectRef && /^[a-z0-9]+$/i.test(projectRef)) {
+      return `https://${projectRef}.supabase.co`;
+    }
+
+    throw new Error(
+      "SUPABASE_URL is a Postgres connection string. Set it to the Supabase Project URL, for example https://<project-ref>.supabase.co."
+    );
+  }
+
+  throw new Error(
+    "SUPABASE_URL must be the Supabase Project URL, for example https://<project-ref>.supabase.co."
+  );
+}
+
 function getConfig() {
-  const url = process.env.SUPABASE_URL?.replace(/\/$/, "");
-  const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url = normalizeSupabaseApiUrl(
+    process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
+  );
+  const key =
+    process.env.SUPABASE_SECRET_KEY ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !key) {
     throw new Error(
@@ -21,9 +62,16 @@ async function request<T>(
 ): Promise<T> {
   const { url, key } = getConfig();
   const headers = new Headers(init.headers);
+
   headers.set("apikey", key);
-  headers.set("Authorization", `Bearer ${key}`);
   headers.set("Content-Type", "application/json");
+
+  // New sb_secret_ keys are API keys, not JWTs. Sending them as Bearer
+  // tokens makes the Data API reject them as invalid JWTs.
+  if (!key.startsWith("sb_secret_") && !key.startsWith("sb_publishable_")) {
+    headers.set("Authorization", `Bearer ${key}`);
+  }
+
   if (prefer) headers.set("Prefer", prefer);
 
   const response = await fetch(`${url}/rest/v1/${path}`, {
@@ -34,7 +82,9 @@ async function request<T>(
 
   if (!response.ok) {
     const body = await response.text();
-    throw new Error(`Database request failed (${response.status}): ${body}`);
+    throw new Error(
+      `Supabase Data API request failed (${response.status}): ${body}`
+    );
   }
 
   if (response.status === 204) {
@@ -45,12 +95,26 @@ async function request<T>(
 }
 
 export function isDatabaseConfigured() {
-  return Boolean(process.env.SUPABASE_URL && (process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY));
+  try {
+    const url = normalizeSupabaseApiUrl(
+      process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
+    );
+    const key =
+      process.env.SUPABASE_SECRET_KEY ||
+      process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    return Boolean(url && key);
+  } catch {
+    return false;
+  }
 }
 
 export async function listShipments(limit = 100) {
   return request<Shipment[]>(
-    `shipments?select=*&order=created_at.desc&limit=${Math.max(1, Math.min(limit, 250))}`
+    `shipments?select=*&order=created_at.desc&limit=${Math.max(
+      1,
+      Math.min(limit, 250)
+    )}`
   );
 }
 
@@ -74,7 +138,9 @@ export async function getPublicShipmentByTrackingNumber(
 ): Promise<PublicShipment | null> {
   const normalized = normalizeTrackingNumber(trackingNumber);
   const shipments = await request<Shipment[]>(
-    `shipments?select=*&tracking_number=eq.${encodeURIComponent(normalized)}&limit=1`
+    `shipments?select=*&tracking_number=eq.${encodeURIComponent(
+      normalized
+    )}&limit=1`
   );
   const shipment = shipments[0];
   if (!shipment) return null;
