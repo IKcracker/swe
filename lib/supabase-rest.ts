@@ -1,5 +1,5 @@
 import type { PublicShipment, Shipment, TrackingEvent } from "@/lib/tracking";
-import type { QuoteRequest, QuoteStatus } from "@/lib/quotes";
+import type { QuoteRequest } from "@/lib/quotes";
 import { normalizeTrackingNumber } from "@/lib/tracking";
 
 function normalizeSupabaseApiUrl(value?: string) {
