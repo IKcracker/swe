@@ -3089,3 +3089,446 @@ body:has(.admin-auth-shell){
     grid-template-columns:1fr;
   }
 }
+
+
+/* Shipment record - production operations view */
+.shipment-record-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.shipment-record-update{
+  position:relative;
+}
+.shipment-record-update>summary{
+  list-style:none;
+  min-height:40px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 14px;
+  border-radius:6px;
+  background:#d71920;
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  cursor:pointer;
+}
+.shipment-record-update>summary::-webkit-details-marker{display:none}
+.shipment-record-update-panel{
+  width:min(420px,calc(100vw - 48px));
+  max-height:calc(100vh - 140px);
+  overflow:auto;
+  position:absolute;
+  right:0;
+  top:50px;
+  z-index:120;
+  padding:22px;
+  background:#fff;
+  border:1px solid #dfe2e6;
+  border-radius:8px;
+  box-shadow:0 24px 70px rgba(17,19,24,.18);
+}
+.shipment-record-update-head{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:flex-start;
+  padding-bottom:16px;
+  margin-bottom:18px;
+  border-bottom:1px solid #e7e9ec;
+}
+.shipment-record-update-head>div>span{
+  display:block;
+  margin-bottom:5px;
+  color:#d71920;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:900;
+}
+.shipment-record-update-head h2{
+  margin:0;
+  font-size:19px;
+  letter-spacing:-.025em;
+}
+.shipment-record-update-head small{
+  color:#81858c;
+  font-size:9px;
+  font-weight:800;
+}
+
+.shipment-record{
+  border:1px solid #dfe2e6;
+  background:#fff;
+}
+.shipment-record-header{
+  padding:22px 24px 18px;
+  border-bottom:1px solid #e4e6e9;
+}
+.shipment-record-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.shipment-record-label{
+  display:block;
+  margin-bottom:6px;
+  color:#7b8088;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-weight:800;
+}
+.shipment-record-heading h2{
+  margin:0;
+  font-size:25px;
+  line-height:1;
+  letter-spacing:-.03em;
+}
+.shipment-record-subhead{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px 28px;
+  margin-top:14px;
+  color:#858991;
+  font-size:9px;
+}
+.shipment-record-subhead strong{
+  margin-left:5px;
+  color:#3b3f45;
+  font-weight:800;
+}
+
+.shipment-route-band{
+  display:grid;
+  grid-template-columns:minmax(180px,1fr) minmax(280px,1.7fr) minmax(180px,1fr);
+  gap:28px;
+  align-items:center;
+  min-height:108px;
+  padding:22px 24px;
+  background:#f7f8f9;
+  border-bottom:1px solid #e4e6e9;
+}
+.shipment-route-location span{
+  display:block;
+  margin-bottom:6px;
+  color:#8d9198;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.shipment-route-location strong{
+  font-size:15px;
+}
+.shipment-route-location-end{
+  text-align:right;
+}
+.shipment-route-middle{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+}
+.shipment-route-line{
+  width:100%;
+  height:1px;
+  background:
+    linear-gradient(to right,
+      #d71920 0 10px,
+      #cfd3d8 10px calc(100% - 10px),
+      #d71920 calc(100% - 10px) 100%);
+}
+.shipment-route-middle>span{
+  max-width:220px;
+  padding:5px 8px;
+  background:#fff;
+  border:1px solid #dfe2e6;
+  border-radius:4px;
+  color:#4d5259;
+  font-size:9px;
+  font-weight:800;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.shipment-record-facts{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  border-bottom:1px solid #e4e6e9;
+}
+.shipment-record-facts>div{
+  min-height:76px;
+  padding:16px 18px;
+  border-right:1px solid #e7e9ec;
+}
+.shipment-record-facts>div:last-child{border-right:0}
+.shipment-record-facts span{
+  display:block;
+  margin-bottom:6px;
+  color:#8d9198;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.shipment-record-facts strong{
+  font-size:10px;
+}
+
+.shipment-record-body{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 310px;
+}
+.shipment-record-main{
+  min-width:0;
+  padding:24px;
+}
+.shipment-record-sidebar{
+  border-left:1px solid #e4e6e9;
+  background:#fbfbfc;
+}
+.shipment-record-sidebar>section{
+  padding:22px;
+  border-bottom:1px solid #e4e6e9;
+}
+.shipment-record-section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:16px;
+}
+.shipment-record-section-title>div>span{
+  display:block;
+  margin-bottom:4px;
+  color:#d71920;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-weight:900;
+}
+.shipment-record-section-title h3{
+  margin:0;
+  font-size:17px;
+  letter-spacing:-.02em;
+}
+.shipment-record-section-title>strong{
+  color:#83878f;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.shipment-record-section-title.compact{
+  margin-bottom:12px;
+}
+.shipment-record-section-title.compact h3{
+  font-size:14px;
+}
+
+.shipment-event-log{
+  border:1px solid #e2e4e7;
+}
+.shipment-event-log-head,
+.shipment-event-log article{
+  display:grid;
+  grid-template-columns:150px 130px 170px minmax(220px,1fr);
+  gap:16px;
+  align-items:start;
+}
+.shipment-event-log-head{
+  padding:10px 14px;
+  background:#f3f4f6;
+  border-bottom:1px solid #e2e4e7;
+  color:#7b8088;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:800;
+}
+.shipment-event-log article{
+  padding:14px;
+  border-bottom:1px solid #eceef0;
+  font-size:10px;
+}
+.shipment-event-log article:last-of-type{
+  border-bottom:0;
+}
+.shipment-event-log time{
+  color:#6e737b;
+  font-size:9px;
+  line-height:1.5;
+}
+.shipment-event-log article>strong{
+  font-size:10px;
+  line-height:1.5;
+}
+.shipment-event-description>strong{
+  display:block;
+  font-size:10px;
+}
+.shipment-event-description p{
+  margin:5px 0 0;
+  color:#81858d;
+  font-size:9px;
+  line-height:1.55;
+}
+.shipment-event-empty{
+  min-height:150px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+.shipment-event-empty strong{
+  font-size:11px;
+}
+.shipment-event-empty span{
+  color:#8f939a;
+  font-size:9px;
+}
+
+.shipment-record-dl{
+  margin:0;
+}
+.shipment-record-dl>div{
+  display:grid;
+  grid-template-columns:92px 1fr;
+  gap:14px;
+  padding:10px 0;
+  border-bottom:1px solid #e8eaed;
+}
+.shipment-record-dl>div:last-child{
+  border-bottom:0;
+}
+.shipment-record-dl dt{
+  color:#8c9097;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+.shipment-record-dl dd{
+  margin:0;
+  color:#35393f;
+  font-size:9px;
+  font-weight:800;
+  line-height:1.45;
+  overflow-wrap:anywhere;
+}
+.shipment-record-dl a{
+  color:#b5161c;
+}
+.shipment-record-id{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:8px!important;
+  font-weight:600!important;
+}
+
+.shipment-record-public-link{
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:18px 22px;
+  background:#16191e;
+  color:#fff;
+}
+.shipment-record-public-link>div>span{
+  display:block;
+  margin-bottom:5px;
+  color:rgba(255,255,255,.44);
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.shipment-record-public-link>div>strong{
+  font-size:10px;
+}
+.shipment-record-public-link>span{
+  color:#ff6f74;
+  font-size:16px;
+}
+
+@media(max-width:1180px){
+  .shipment-record-body{
+    grid-template-columns:1fr;
+  }
+  .shipment-record-sidebar{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border-left:0;
+    border-top:1px solid #e4e6e9;
+  }
+  .shipment-record-public-link{
+    grid-column:1/-1;
+  }
+  .shipment-record-sidebar>section:first-child{
+    border-right:1px solid #e4e6e9;
+  }
+}
+@media(max-width:980px){
+  .shipment-record-facts{
+    grid-template-columns:1fr 1fr;
+  }
+  .shipment-record-facts>div{
+    border-bottom:1px solid #e7e9ec;
+  }
+  .shipment-record-facts>div:nth-child(2n){
+    border-right:0;
+  }
+  .shipment-event-log{
+    overflow:auto;
+  }
+  .shipment-event-log-head,
+  .shipment-event-log article{
+    min-width:820px;
+  }
+}
+@media(max-width:760px){
+  .shipment-record-actions{
+    width:100%;
+    flex-wrap:wrap;
+  }
+  .shipment-record-update{
+    width:100%;
+  }
+  .shipment-record-update>summary{
+    width:100%;
+  }
+  .shipment-record-update-panel{
+    position:fixed;
+    inset:16px;
+    width:auto;
+    max-height:calc(100vh - 32px);
+    top:16px;
+  }
+  .shipment-record-heading{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .shipment-route-band{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .shipment-route-location-end{
+    text-align:left;
+  }
+  .shipment-route-middle{
+    display:none;
+  }
+  .shipment-record-facts{
+    grid-template-columns:1fr;
+  }
+  .shipment-record-facts>div{
+    border-right:0;
+  }
+  .shipment-record-sidebar{
+    grid-template-columns:1fr;
+  }
+  .shipment-record-sidebar>section:first-child{
+    border-right:0;
+  }
+}
