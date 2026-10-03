@@ -88,15 +88,6 @@ export default async function QuotePage({
                 </div>
 
                 <form action={submitQuoteRequest} className="public-quote-form">
-                  <input
-                    type="text"
-                    name="company_website"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    className="quote-honeypot"
-                    aria-hidden="true"
-                  />
-
                   <div className="quote-form-section">
                     <div className="quote-form-section-head">
                       <span>01</span>
