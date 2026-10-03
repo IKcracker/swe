@@ -17,11 +17,6 @@ function optional(value: FormDataEntryValue | null) {
 }
 
 export async function submitQuoteRequest(formData: FormData) {
-  // Basic honeypot for automated spam.
-  if (String(formData.get("company_website") ?? "").trim()) {
-    redirect("/quote?submitted=1");
-  }
-
   const email = required(formData.get("email"), "Email");
   if (!/^\S+@\S+\.\S+$/.test(email)) {
     throw new Error("Enter a valid email address.");
