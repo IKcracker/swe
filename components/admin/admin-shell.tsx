@@ -24,6 +24,15 @@ function BoxIcon() {
   );
 }
 
+function QuoteIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 4h14v16H5z" />
+      <path d="M8 8h8M8 12h6M8 16h4" />
+    </svg>
+  );
+}
+
 function RadarIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -52,7 +61,7 @@ export function AdminShell({
 }: {
   title: string;
   description?: string;
-  section?: "overview" | "shipments";
+  section?: "overview" | "shipments" | "quotes";
   actions?: ReactNode;
   children: ReactNode;
 }) {
@@ -84,6 +93,13 @@ export function AdminShell({
           >
             <BoxIcon />
             <span>Shipments</span>
+          </Link>
+          <Link
+            href="/admin/quotes"
+            className={section === "quotes" ? "is-active" : undefined}
+          >
+            <QuoteIcon />
+            <span>Quote requests</span>
           </Link>
           <Link href="/track" target="_blank">
             <RadarIcon />
