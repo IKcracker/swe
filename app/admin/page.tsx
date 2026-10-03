@@ -48,17 +48,26 @@ export default async function AdminPage({
   const configured = isDatabaseConfigured();
   let shipments: Shipment[] = [];
   let quotes: QuoteRequest[] = [];
-  let loadError = "";
+  let shipmentLoadError = "";
+  let quoteLoadError = "";
 
   if (configured) {
     try {
-      [shipments, quotes] = await Promise.all([
-        listShipments(250),
-        listQuoteRequests(250),
-      ]);
+      shipments = await listShipments(250);
     } catch (error) {
-      console.error(error);
-      loadError = "The database is configured but dashboard data could not be loaded.";
+      console.error("Shipment dashboard load failed", error);
+      shipmentLoadError = "Shipment data could not be loaded.";
+    }
+
+    try {
+      quotes = await listQuoteRequests(250);
+    } catch (error) {
+      console.error("Quote dashboard load failed", error);
+      const message = error instanceof Error ? error.message : String(error);
+      quoteLoadError =
+        /quote_requests|PGRST205|42P01|schema cache/i.test(message)
+          ? "Quote Requests is not ready yet. Run the latest supabase/schema.sql in your Supabase SQL Editor to create the quote_requests table, then refresh this page."
+          : "Quote request data could not be loaded. Check the server log for the Supabase Data API error.";
     }
   }
 
@@ -188,7 +197,16 @@ export default async function AdminPage({
         </section>
       ) : null}
 
-      {loadError ? <section className="admin-setup-notice">{loadError}</section> : null}
+      {shipmentLoadError ? (
+        <section className="admin-setup-notice">{shipmentLoadError}</section>
+      ) : null}
+
+      {quoteLoadError ? (
+        <section className="admin-setup-notice">
+          <strong>Quote backend setup required</strong>
+          <p>{quoteLoadError}</p>
+        </section>
+      ) : null}
 
       <section className="admin-metric-grid">
         <article>
@@ -236,7 +254,7 @@ export default async function AdminPage({
             <span>Quote requests</span>
             <i className="metric-dot metric-dot-danger" />
           </div>
-          <strong>{quoteAttention}</strong>
+          <strong>{quoteLoadError ? "—" : quoteAttention}</strong>
           <small>
             <Link href="/admin/quotes">New or reviewing quotes →</Link>
           </small>
