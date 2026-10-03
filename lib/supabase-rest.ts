@@ -3,11 +3,11 @@ import { normalizeTrackingNumber } from "@/lib/tracking";
 
 function getConfig() {
   const url = process.env.SUPABASE_URL?.replace(/\/$/, "");
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !key) {
     throw new Error(
-      "Tracking backend is not configured. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY."
+      "Tracking backend is not configured. Set SUPABASE_URL and SUPABASE_SECRET_KEY."
     );
   }
 
@@ -45,7 +45,7 @@ async function request<T>(
 }
 
 export function isDatabaseConfigured() {
-  return Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+  return Boolean(process.env.SUPABASE_URL && (process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY));
 }
 
 export async function listShipments(limit = 100) {
