@@ -56,6 +56,10 @@ for each row execute function public.set_updated_at();
 alter table public.shipments enable row level security;
 alter table public.tracking_events enable row level security;
 
+grant usage on schema public to service_role;
+grant select, insert, update, delete on public.shipments to service_role;
+grant select, insert, update, delete on public.tracking_events to service_role;
+
 -- No anon/authenticated policies are created on purpose.
--- The website accesses these tables only from Next.js server code
--- using SUPABASE_SERVICE_ROLE_KEY.
+-- The website accesses these tables only from trusted Next.js server code
+-- using SUPABASE_SECRET_KEY (or the legacy service_role key as a fallback).
