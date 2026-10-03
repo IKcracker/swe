@@ -10,6 +10,7 @@ import {
 import {
   createShipment,
   createTrackingEvent,
+  updateQuoteRequest,
   updateShipment,
 } from "@/lib/supabase-rest";
 import {
@@ -17,6 +18,10 @@ import {
   shipmentStatuses,
   type ShipmentStatus,
 } from "@/lib/tracking";
+import {
+  quoteStatuses,
+  type QuoteStatus,
+} from "@/lib/quotes";
 
 function optionalString(value: FormDataEntryValue | null) {
   const normalized = String(value ?? "").trim();
@@ -27,6 +32,14 @@ function requiredString(value: FormDataEntryValue | null, field: string) {
   const normalized = String(value ?? "").trim();
   if (!normalized) throw new Error(`${field} is required.`);
   return normalized;
+}
+
+function quoteStatusFromForm(value: FormDataEntryValue | null): QuoteStatus {
+  const status = String(value ?? "") as QuoteStatus;
+  if (!quoteStatuses.includes(status)) {
+    throw new Error("Invalid quote status.");
+  }
+  return status;
 }
 
 function statusFromForm(value: FormDataEntryValue | null): ShipmentStatus {
@@ -111,4 +124,26 @@ export async function updateShipmentAction(formData: FormData) {
   revalidatePath(`/admin/shipments/${shipmentId}`);
   revalidatePath("/track");
   redirect(`/admin/shipments/${shipmentId}?updated=1`);
+}
+
+
+export async function updateQuoteRequestAction(formData: FormData) {
+  await requireAdmin();
+
+  const quoteId = requiredString(formData.get("quote_id"), "Quote ID");
+  const status = quoteStatusFromForm(formData.get("status"));
+  const amountRaw = optionalString(formData.get("quoted_amount"));
+  const adminNotes = optionalString(formData.get("admin_notes"));
+
+  await updateQuoteRequest(quoteId, {
+    status,
+    quoted_amount: amountRaw ? Number(amountRaw) : null,
+    admin_notes: adminNotes,
+  });
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/quotes");
+  revalidatePath(`/admin/quotes/${quoteId}`);
+
+  redirect(`/admin/quotes/${quoteId}?updated=1`);
 }
