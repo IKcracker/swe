@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SWE Red
 
-## Getting Started
+SWE Red is a Next.js 16 logistics proposal site with a built-in shipment tracking backend and admin operations area.
 
-First, run the development server:
+## Core routes
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- `/` — public marketing site
+- `/track` — public shipment tracking
+- `/api/tracking/[trackingNumber]` — public read-only tracking API
+- `/admin/login` — protected admin login
+- `/admin` — shipment operations dashboard
+- `/admin/shipments/[id]` — shipment status and tracking history management
+
+## Tracking backend
+
+The tracking system uses Supabase PostgreSQL through the Supabase REST API.
+
+The browser never receives the Supabase service-role key. Database access and admin mutations happen only in Next.js server code.
+
+### Data model
+
+`shipments`
+- tracking number
+- customer reference
+- origin / destination
+- service type
+- current status
+- current location
+- estimated delivery
+- recipient details
+- package count
+- weight
+- created / updated timestamps
+
+`tracking_events`
+- shipment
+- status
+- customer-facing event title
+- description
+- location
+- event timestamp
+
+## Backend setup
+
+### 1. Create a Supabase project
+
+Create a new Supabase project and open its SQL Editor.
+
+### 2. Run the schema
+
+Run the contents of:
+
+```
+supabase/schema.sql
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The SQL creates the shipment tables, indexes, status constraints, timestamp trigger and row-level security.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+No public table policies are created. The app accesses the database from server code using the service-role key.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Add environment variables
 
-## Learn More
+Copy `.env.example` to `.env.local` for local development:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cp .env.example .env.local
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Configure:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env
+SUPABASE_URL=https://YOUR_PROJECT.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
+SWE_ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
+SWE_ADMIN_SESSION_SECRET=USE_A_LONG_RANDOM_SECRET
+```
 
-## Deploy on Vercel
+Never expose `SUPABASE_SERVICE_ROLE_KEY` to the browser and never prefix it with `NEXT_PUBLIC_`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 4. Run locally
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm install
+npm run dev
+```
+
+Open:
+
+- `http://localhost:3000/admin/login`
+- `http://localhost:3000/track`
+
+### 5. Configure Vercel
+
+Add the same four environment variables in the Vercel project for Production and Preview.
+
+Redeploy after saving the variables.
+
+## Admin workflow
+
+1. Sign in at `/admin/login`.
+2. Create a shipment.
+3. A tracking number is generated automatically if none is entered.
+4. The system creates the initial tracking event.
+5. Open a shipment and publish status updates.
+6. Customers enter the tracking number at `/track`.
+7. The public page displays only shipment-safe fields and tracking events.
+
+## Statuses
+
+- Booked
+- Collected
+- In transit
+- At hub
+- Out for delivery
+- Delivered
+- Exception
+- Cancelled
+
+## Security notes
+
+- Admin sessions use an HTTP-only signed cookie.
+- Shipment write operations require an authenticated admin session.
+- The Supabase service-role key remains server-side.
+- Public tracking responses exclude recipient contact details.
+- `/admin` and `/api` are excluded from search-engine crawling.
+- For higher traffic, add distributed rate limiting to the public tracking endpoint and admin login.
+
+## Build
+
+```bash
+npm run build
+```
