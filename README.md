@@ -130,3 +130,25 @@ Redeploy after saving the variables.
 ```bash
 npm run build
 ```
+
+
+## Quote requests
+
+The public `/quote` page now saves quote enquiries into Supabase.
+
+Admin routes:
+
+- `/admin/quotes` — quote inbox and pipeline
+- `/admin/quotes/[id]` — quote detail, price, status and internal notes
+
+Quote pipeline statuses:
+
+- New
+- Reviewing
+- Quoted
+- Won
+- Lost
+
+After pulling the latest code, run the current `supabase/schema.sql` in the Supabase SQL Editor again. It creates the `quote_requests` table and grants server-side Data API access.
+
+New website submissions are private. They are created through a Next.js Server Action using the server-only Supabase secret key; no anonymous table policy is added.
