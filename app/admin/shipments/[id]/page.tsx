@@ -86,26 +86,26 @@ export default async function ShipmentDetailPage({
         <div className="admin-success-notice">Shipment update published successfully.</div>
       ) : null}
 
-      <section className="admin-shipment-summary">
-        <div className="admin-shipment-status-block">
-          <span className="admin-section-kicker">Current status</span>
-          <div className="admin-shipment-status-line">
-            <span className={`status-pill status-${shipment.status.toLowerCase()}`}>
-              {getStatusLabel(shipment.status)}
-            </span>
-            <small>Last updated {formatDate(shipment.updated_at)}</small>
-          </div>
+      <section className="shipment-control-hero">
+        <div className="shipment-control-status">
+          <span className="admin-section-kicker">Live shipment status</span>
+          <span className={`status-pill status-${shipment.status.toLowerCase()}`}>
+            {getStatusLabel(shipment.status)}
+          </span>
+          <small>Updated {formatDate(shipment.updated_at)}</small>
         </div>
 
-        <div className="admin-shipment-route">
+        <div className="shipment-control-route">
           <div>
             <small>Origin</small>
             <strong>{shipment.origin}</strong>
           </div>
-          <div className="admin-route-line">
-            <span />
+          <div className="shipment-control-journey">
+            <span className="journey-point is-start" />
             <i />
-            <span />
+            <span className="journey-truck">→</span>
+            <i />
+            <span className="journey-point is-end" />
           </div>
           <div>
             <small>Destination</small>
@@ -113,23 +113,24 @@ export default async function ShipmentDetailPage({
           </div>
         </div>
 
-        <div className="admin-shipment-eta">
+        <div className="shipment-control-eta">
           <small>Estimated delivery</small>
           <strong>{formatDate(shipment.estimated_delivery)}</strong>
+          <span>{shipment.current_location || "In network"}</span>
         </div>
       </section>
 
-      <section className="admin-detail-layout">
-        <div className="admin-detail-main">
-          <section className="admin-content-card">
-            <div className="admin-card-heading">
+      <section className="shipment-detail-shell">
+        <div className="shipment-detail-main">
+          <section className="shipment-facts-card">
+            <div className="shipment-section-heading">
               <div>
-                <span className="admin-section-kicker">Shipment overview</span>
-                <h2>Shipment information</h2>
+                <span className="admin-section-kicker">Shipment facts</span>
+                <h2>At a glance</h2>
               </div>
             </div>
 
-            <div className="admin-information-grid">
+            <div className="shipment-facts-grid">
               <div>
                 <small>Customer reference</small>
                 <strong>{shipment.customer_reference || "—"}</strong>
@@ -157,15 +158,15 @@ export default async function ShipmentDetailPage({
             </div>
           </section>
 
-          <section className="admin-content-card">
-            <div className="admin-card-heading">
+          <section className="shipment-facts-card">
+            <div className="shipment-section-heading">
               <div>
                 <span className="admin-section-kicker">Recipient</span>
                 <h2>Delivery contact</h2>
               </div>
             </div>
 
-            <div className="admin-recipient-grid">
+            <div className="shipment-contact-grid">
               <div>
                 <small>Name</small>
                 <strong>{shipment.recipient_name || "Not provided"}</strong>
@@ -181,8 +182,8 @@ export default async function ShipmentDetailPage({
             </div>
           </section>
 
-          <section className="admin-content-card">
-            <div className="admin-card-heading admin-card-heading-split">
+          <section className="shipment-timeline-card">
+            <div className="shipment-section-heading shipment-section-heading-split">
               <div>
                 <span className="admin-section-kicker">Tracking history</span>
                 <h2>Shipment timeline</h2>
@@ -192,14 +193,14 @@ export default async function ShipmentDetailPage({
               </span>
             </div>
 
-            <div className="admin-timeline admin-timeline-modern">
+            <div className="shipment-timeline">
               {events.map((event, index) => (
                 <article key={event.id} className={index === 0 ? "is-latest" : undefined}>
-                  <div className="admin-timeline-rail">
+                  <div className="shipment-timeline-marker">
                     <span />
                   </div>
-                  <div className="admin-timeline-content">
-                    <div className="admin-timeline-meta">
+                  <div className="shipment-timeline-content">
+                    <div className="shipment-timeline-meta">
                       <strong>{event.title}</strong>
                       <time>{formatDate(event.event_time)}</time>
                     </div>
@@ -222,9 +223,9 @@ export default async function ShipmentDetailPage({
           </section>
         </div>
 
-        <aside className="admin-detail-sidebar">
-          <section className="admin-content-card admin-update-card">
-            <div className="admin-card-heading">
+        <aside className="shipment-detail-aside">
+          <section className="shipment-update-panel">
+            <div className="shipment-section-heading">
               <div>
                 <span className="admin-section-kicker">Shipment controls</span>
                 <h2>Publish update</h2>
@@ -287,7 +288,7 @@ export default async function ShipmentDetailPage({
             </form>
           </section>
 
-          <section className="admin-help-card">
+          <section className="shipment-customer-preview">
             <span>Public tracking</span>
             <p>
               Updates published here appear immediately on the customer tracking page.
