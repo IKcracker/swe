@@ -1,4 +1,5 @@
 import type { PublicShipment, Shipment, TrackingEvent } from "@/lib/tracking";
+import type { QuoteRequest, QuoteStatus } from "@/lib/quotes";
 import { normalizeTrackingNumber } from "@/lib/tracking";
 
 function normalizeSupabaseApiUrl(value?: string) {
@@ -241,4 +242,72 @@ export async function createTrackingEvent(input: {
   );
 
   return rows[0];
+}
+
+
+export async function createQuoteRequest(input: {
+  quote_number: string;
+  full_name: string;
+  company_name?: string | null;
+  email: string;
+  phone: string;
+  origin: string;
+  destination: string;
+  service_type: string;
+  package_count?: number;
+  weight_kg?: number | null;
+  dimensions?: string | null;
+  preferred_collection_date?: string | null;
+  notes?: string | null;
+}) {
+  const rows = await request<QuoteRequest[]>(
+    "quote_requests",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        ...input,
+        status: "NEW",
+      }),
+    },
+    "return=representation"
+  );
+
+  return rows[0];
+}
+
+export async function listQuoteRequests(limit = 250) {
+  return request<QuoteRequest[]>(
+    `quote_requests?select=*&order=created_at.desc&limit=${Math.max(
+      1,
+      Math.min(limit, 500)
+    )}`
+  );
+}
+
+export async function getQuoteRequestById(id: string) {
+  const rows = await request<QuoteRequest[]>(
+    `quote_requests?select=*&id=eq.${encodeURIComponent(id)}&limit=1`
+  );
+  return rows[0] ?? null;
+}
+
+export async function updateQuoteRequest(
+  id: string,
+  patch: Partial<
+    Pick<
+      QuoteRequest,
+      "status" | "quoted_amount" | "admin_notes"
+    >
+  >
+) {
+  const rows = await request<QuoteRequest[]>(
+    `quote_requests?id=eq.${encodeURIComponent(id)}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(patch),
+    },
+    "return=representation"
+  );
+
+  return rows[0] ?? null;
 }
